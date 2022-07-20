@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Promis Gaming</title>
+    <script src="./jquery-3.6.0.js"></script>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+</head>
+<body>
+    <header>
+        <button onclick="myFunction()">dark mode</button>
+    </header>
+    <main>
+    <h2>Toggle Switch</h2>
+    <label class="switch">
+    <input type="checkbox" checked>
+    <span class="slider round"></span>
+    </label>
+        <table>
+            <thead>
+                <tr>
+                    <th>
+    
+                    </th>
+                </tr>
+            </thead>
+        </table>
+    </main>
+    <footer>
+        
+    </footer>
+</body>
+<script>
+
+    //---------------------------calling the json file----------------------------------//
+    //     let populate = (data)=>{
+    //     let tbody = document.getElementsByTagName("tbody")[0];
+    //     let datas = JSON.parse(data)
+    //     for (let obj of datas){
+    //         let tr = document.createElement('tr');
+    //         for (let prop in obj){
+    //             let td = document.createElement("td");
+    //             td.innerText = obj[prop];
+    //             tr.appendChild(td);
+    //         }
+    //         tbody.appendChild(tr);
+    //     }
+    // }
+    // async function loadJson(){
+    // let ajaxPromise = new Promise ((resolve,reject)=>{
+    //     let req = new XMLHttpRequest();
+    //     req.open("GET","./data.json");
+    //     req.onload = () =>{
+    //         if(req.status==200){
+    //             resolve(req.responseText);
+    //         }else{
+    //             reject(req.statusText0);
+    //         }
+    //     };
+    //     req.send();
+    // })
+    // populate(await ajaxPromise);
+    // }
+    // loadJson().then(
+    //     ()=>{},
+    //     (reason)=>{alert(reason);}
+    // )
+    //------------------light dark mode -------------------------------------------------------//
+    function myFunction() {
+   var element = document.body;
+   element.classList.toggle("dark-mode");
+}
+</script>
+</html>

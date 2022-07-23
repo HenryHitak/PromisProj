@@ -7,36 +7,115 @@
     <title>Promis Gaming</title>
     <script src="./jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="./css/stylesheet.css">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script> -->
 </head>
 <body>
     <header>
-        <button onclick="myFunction()">dark mode</button>
+        <h1>
+            Promise
+        </h1>
+        <div class="btns">
+            <button onclick="">Log in</button>
+            <button onclick="">Log out</button>
+            <button onclick="">Cart</button>
+            <button onclick="">Check-out</button>
+        </div>
+        <button onclick="myFunction()">Dark mode</button>
+        <div class="loginmodal">
+
+        </div>
+        <div class="logoutmodal">
+
+        </div>
+        <div class="cartModal">
+
+        </div>
+        <div class="checkoutmodal">
+
+        </div>
     </header>
+            <nav>
+                <h1>
+                    Promise list
+                </h1>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Games</a></li>
+                    <li><a href="#projects">Sales</a></li>
+                </ul>
+                <details>
+                    <summary class="fa-solid fa-bars"></summary>
+                <ul>
+                    <li><a href="#home">Home</a></li>
+                    <li><a href="#about">Games</a></li>
+                    <li><a href="#projects">Sales</a></li>
+                </ul>
+                </details>
+            </nav>
+            <div class="back-to-top">
+                <a href="#home"><i class="fa-solid fa-turn-up"></i></a>
+            </div>
     <main>
-    <h2>Toggle Switch</h2>
-    <label class="switch">
-    <input type="checkbox" checked>
-    <span class="slider round"></span>
-    </label>
-        <table>
-            <thead>
-                <tr>
-                    <th>
-    
-                    </th>
-                </tr>
-            </thead>
-        </table>
+        <section class="slides">
+            <div class="slideshow-container">
+                <!-- Full-width images with number and caption text -->
+                <div class="mySlides fade">
+                <div class="numbertext">1 / 4</div>
+                <img src="img/nature.jpg" style="width:100%">
+                <div class="text">Caption Text</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">2 / 4</div>
+                <img src="img/snow.jpg" style="width:100%">
+                <div class="text">Caption Two</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">3 / 4</div>
+                <img src="img/light.jpg" style="width:100%">
+                <div class="text">Caption Three</div>
+            </div>
+            <div class="mySlides fade">
+                <div class="numbertext">4 / 4</div>
+                <img src="img/mountain.jpg" style="width:100%">
+                <div class="text">Caption Four</div>
+            </div>
+            <!-- Next and previous buttons -->
+            <a class="prev" onclick="showSlides(-1)">&#10094;</a>
+            <a class="next" onclick="showSlides(1)">&#10095;</a>
+        </div>
+        <!-- The dots/circles -->
+        <div style="text-align:center">
+            <span class="dot" onclick="showSlides(0-activeIndex)"></span>
+            <span class="dot" onclick="showSlides(1-activeIndex)"></span>
+            <span class="dot" onclick="showSlides(2-activeIndex)"></span>
+            <span class="dot" onclick="showSlides(3-activeIndex)"></span>
+    </div>
+        </section>
+        <section class="gameTable">
+            <h2>Dark-Mode</h2>
+            <label class="switch">
+            <input type="checkbox" checked>
+            <span class="slider round"></span>
+            </label>
+        </section>
+        <section class="cookiepolicy">
+            <article>
+
+            </article>
+        </section>
     </main>
     <footer>
-        
+        <div>
+            <span>
+                Copyright &copy; Promis inc.All Rights Reserved.
+            </span>
+        </div>
     </footer>
 </body>
 <script>
 
-    //---------------------------calling the json file----------------------------------//
+//---------------------------calling the json file----------------------------------//
     //     let populate = (data)=>{
     //     let tbody = document.getElementsByTagName("tbody")[0];
     //     let datas = JSON.parse(data)
@@ -69,7 +148,23 @@
     //     ()=>{},
     //     (reason)=>{alert(reason);}
     // )
-    //------------------light dark mode -------------------------------------------------------//
+//-----------------slide show--------------------------------------------------------------//
+    let slides = document.getElementsByClassName("mySlides");
+    let activeIndex = 0;
+    showSlides(activeIndex);
+    function showSlides(slideCounter){
+        activeIndex += slideCounter;
+        if(activeIndex>=slides.length) {
+            activeIndex = 0;
+        }else if(activeIndex<0){
+            activeIndex = slides.length -1;
+        }
+        for (let i=0;i<slides.length;i++){
+            slides[i].style.display = "none";//hide all the slides
+        }
+        slides[activeIndex].style.display = "block";//only show the active slide
+    }
+//------------------light dark mode -------------------------------------------------------//
     function myFunction() {
    var element = document.body;
    element.classList.toggle("dark-mode");

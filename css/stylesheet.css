@@ -3,15 +3,13 @@
   padding: 0;
 }
 
-@import url("https://fonts.googleapis.com/css2?family=PT+Serif&display=swap");
-
 body {
   padding: 25px;
   background-color: white;
   color: black;
   font-size: 25px;
 }
- .back-to-top > a {
+.back-to-top > a {
       background-color: steelblue;
       border-radius: 50%;
       display: flex;
@@ -22,7 +20,7 @@ body {
       font-size: 14px;
       text-decoration: none;
       color: #64ffda;
-    }
+}
 /* //light mode colour//
 
 //darkmode colour// */

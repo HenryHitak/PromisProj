@@ -7,8 +7,9 @@
     <title>Promis Gaming</title>
     <script src="./jquery-3.6.0.js"></script>
     <link rel="stylesheet" href="./css/stylesheet.css">
-    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">
-    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script> -->
+    <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous"> -->
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    
 </head>
 <body>
     <header>
@@ -16,15 +17,38 @@
             Promise
         </h1>
         <div class="btns">
-            <button onclick="">Log in</button>
-            <button onclick="">Log out</button>
-            <button onclick="">Cart</button>
+            <div class="loginmodal">
+                <h2>Login</h2>
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;">Login</button>
+                <div id="id01" class="modal">
+                <form class="modal-content animate" action="blank" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="./img/guest.jpg" alt="Avatar" class="avatar">
+                    </div>
+                    <div class="container">
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="uname" required>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>    
+                        <button type="submit">Login</button>
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                    </div>
+
+                    <div class="container" style="background-color:#f1f1f1">
+                    <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                    <span class="psw">Forgot <a href="#">password?</a></span>
+                </div>
+                </form>
+            </div>
+            <a href="#" onclick="">Log out</a>
+            <button onclick=""><img src="./img/kart.png"></button>
             <button onclick="">Check-out</button>
         </div>
         <button onclick="myFunction()">Dark mode</button>
-        <div class="loginmodal">
 
-        </div>
         <div class="logoutmodal">
 
         </div>
@@ -105,7 +129,16 @@
     </footer>
 </body>
 <script>
+//---------------------------login and out-------------------------------------//
+// Get the modal
+var modal = document.getElementById('id01');
 
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+    if (event.target == modal) {
+        modal.style.display = "none";
+    }
+}
 //---------------------------calling the json file----------------------------------//
     //     let populate = (data)=>{
     //     let tbody = document.getElementsByTagName("tbody")[0];
@@ -146,7 +179,7 @@
 //     $("#panel").slideDown("slow");
 //   });
 //     $("#flip").blur(function(){
-//     $("#panel").slideUp("slow");
+//     $("#panel").slideUp("fast");
 //   });
 // });
 //-----------------slide show--------------------------------------------------------------//

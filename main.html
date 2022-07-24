@@ -126,6 +126,7 @@
                         <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
                         <div class="btn-wrap">
                             <button class="btn-primary" onclick="acceptCookieConsent();">Accept</button>
+                            <button class="btn-secondary" onclick="declineCookieConsent();">Decline</button>
                         </div>
                     </div>
                 </div>
@@ -144,9 +145,9 @@
 //--------------------------Cookie consent popup-------------------------------//
 // Create cookie
 function setCookie(cname, cvalue, exdays) {
-    let dates = new Date();
-    dates.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ dates.toUTCString();
+    const d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    let expires = "expires="+ d.toUTCString();
     document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
 }
 
@@ -186,6 +187,9 @@ if(cookie_consent != ""){
     document.getElementById("cookieNotice").style.display = "none";
 }else{
     document.getElementById("cookieNotice").style.display = "block";
+}
+function declineCookieConsent(){
+    document.getElementById("cookieNotice").style.display = "none";
 }
 //---------------------------login and out-------------------------------------//
 // Get the modal

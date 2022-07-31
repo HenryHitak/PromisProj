@@ -11,28 +11,38 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <link rel="stylesheet" href="./css/stylesheet.css">
 </head>
-<body>
+<body ng-app="regApp">
     <header>
         <div class="btns">
             <div class="loginmodal">
                 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-btn">Login</button>
                 <!-- Login modal -->
                 <div id="id01" class="modal">
+
+                <form class="modal-content animate" action="blank" method="post" name="registerForm">
+                    <div name="registerForm" class="container" ng-controller="regCtrl">
+
                 <form class="modal-content animate" action="blank" method="post">
                     <div class="imgcontainer">
                         <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
                         <img src="./img/guest.png" alt="Avatar" class="avatar" style="width:300px">
                     </div>
                     <div class="container" style="width:700px">
+
                         <label for="uname"><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="uname" required>
+                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="username" required>
+                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >*Username should be filled*</p>
                         <label for="psw"><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" name="psw" required>    
-                        <button type="submit">Login</button>
                         <label>
                             <input type="checkbox" checked="checked" name="remember"> Remember me
                         </label>
+                        <div class="container">
+                        <button type="submit">Login</button>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw"><a href="#">Forgot password?</a></span>
                     </div>
+
 
                     <div class="container" style="background-color:#f1f1f1">
                         <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
@@ -81,9 +91,6 @@
                     <li><a href="#projects">About</a></li>
                 </ul>
             </nav>
-            <div class="back-to-top">
-                <a href="#home"><i class="fa-solid fa-turn-up"></i></a>
-            </div>
     <main>
         <!-- Carousel slider section -->
         <section class="container max-height d-flex align-items-center">
@@ -166,7 +173,11 @@
         </section>
     </main>
     <footer>
+
+        All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
+
         All Rights Reserved &copy; Promis Team (2022) Tamwood College, Vancouver, BC
+
     </footer>
 </body>
 <script>
@@ -229,6 +240,16 @@ window.onclick = function(event) {
         modal.style.display = "none";
     }
 }
+let regApp = angular.module('regApp',[]);
+regApp.controller('regCtrl',($scope)=>{
+    console.log(registerForm.usernameInput);
+    switch(event.type){
+
+    }
+    $scope.btnClick = () =>{
+
+    }
+})
 //---------------------------calling the json file----------------------------------//
     //     let populate = (data)=>{
     //     let tbody = document.getElementsByTagName("tbody")[0];

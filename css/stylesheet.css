@@ -2,24 +2,73 @@
   margin: 0;
   padding: 0;
 }
+html{
+    scroll-behavior: smooth;
+}
+h1 {
+  color: #f44336;
+}
 
 body {
-  padding: 25px;
   background-color: white;
   color: black;
-  font-size: 25px;
+  font-size: 18px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
 }
+
+header {
+  width: 100%;
+  height: 10vh;
+  padding: 4%;
+  background-color: slategrey;
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+}
+a{
+  text-decoration: none;
+}
+button{
+  outline: none;
+  border: 0.5px solid darkgray;
+}
+
+footer {
+  background-color: black;
+  padding: 1.5%;
+  width: 100%;
+  font-size: 16px;
+  color: white;
+  height: 5vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.login-btn {
+  font-size: 15px;
+  border-radius: 10%;
+}
+
+.cart {
+  width: 50px;
+  height: 50px;
+}
+
 .back-to-top > a {
-      background-color: steelblue;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      width: 3vh;
-      height: 3vh;
-      font-size: 14px;
-      text-decoration: none;
-      color: #64ffda;
+    background-color: steelblue;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 3vh;
+    height: 3vh;
+    font-size: 14px;
+    text-decoration: none;
+    color: #64ffda;
 }
 /* //light mode colour//
 
@@ -36,130 +85,81 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   background-color: rgb(17, 34, 64);
   color: #64ffda;
 }
-        * {box-sizing:border-box}
-        
-        /* Slideshow container */
-        .slideshow-container {
-            max-width: 1000px;
-            position: relative;
-            margin: auto;
-        }
-        
-        /* Hide the images by default */
-        .mySlides {
-            display: none;
-        }
-        
-        /* Next & previous buttons */
-        .prev, .next {
-            cursor: pointer;
-            position: absolute;
-            top: 50%;
-            width: auto;
-            margin-top: -22px;
-            padding: 16px;
-            color: white;
-            font-weight: bold;
-            font-size: 18px;
-            transition: 0.6s ease;
-            border-radius: 0 3px 3px 0;
-            user-select: none;/*what is it?*/
-        }
-        
-        /* Position the "next button" to the right */
-        .next {
-            right: 0;
-            border-radius: 3px 0 0 3px;
-        }
-        
-        /* On hover, add a black background color with a little bit see-through */
-        .prev:hover, .next:hover {
-            background-color: rgba(0,0,0,0.8);
-        }
-        
-        /* Caption text */
-        .text {
-            color: #f2f2f2;
-            font-size: 15px;
-            padding: 8px 12px;
-            position: absolute;
-            bottom: 8px;
-            width: 100%;
-            text-align: center;
-        }
-        
-        /* Number text (1/3 etc) */
-        .numbertext {
-      color: #f2f2f2;
-      font-size: 12px;
-      padding: 8px 12px;
-      position: absolute;
-      top: 0;
-    }
-    
-    /* The dots/bullets/indicators */
-    .dot {
-        cursor: pointer;
-        height: 15px;
-        width: 15px;
-        margin: 0 2px;
-        background-color: #bbb;
-        border-radius: 50%;
-        display: inline-block;
-        transition: background-color 0.6s ease;
-    }
-    
-    .active, .dot:hover {
-        background-color: #717171;
-    }
-    
-    /* Fading animation */
-    .fade {
-        animation-name: fade;
-        animation-duration: 1.5s;
-    }
-    
-    @keyframes fade {
-        from {opacity: .4}
-        to {opacity: 1}
-    }
 
-    #panel, #flip {
-    padding: 5px;
-    text-align: center;
-    background-color: #e5eecc;
-    border: solid 1px #c3c3c3;
-    }
-
-    #panel {
-    padding: 50px;
-    display: none;
-    }
-    
-    .back-to-top {
-    margin-left: 95%;
-    position: fixed;
-    height: 95%;
-    width: 1%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-end;
-    align-items: flex-end;
-    }
-
-/* Full-width input fields */
-input[type=text], input[type=password] {
-  width: 100%;
-  padding: 12px 20px;
-  margin: 8px 0;
-  display: inline-block;
-  border: 1px solid #ccc;
-  box-sizing: border-box;
+#carouselExampleCaptions {
+  overflow: hidden;
 }
 
+.carousel-item {
+  width: 100%;
+  height: 90vh;
+}
+
+.carousel-caption {
+  position: absolute;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 100;
+  background: rgba(0,0,0,0.4);
+}
+.cookiepolicy{
+  width: 100%;
+  padding: 1%;
+  background-color: black;
+  color: white;
+  font-size: medium;
+  display: flex;
+  justify-content: flex-end;
+  align-items: flex-end;
+  opacity: 80%;
+  position:fixed;
+  z-index: 20000;
+  left: 0;
+  margin-top: 82vh;
+  top: 0;
+  overflow: auto; /* Enable scroll if needed */
+}
+.cookiepolicy button{
+  border: none;
+  background-color: blanchedalmond;
+  width: auto;
+  height: auto;
+}
+.cookiepolicy button:hover{
+  background-color: black;
+  color: white;
+}
+/* The dots/bullets/indicators */
+.dot {
+  cursor: pointer;
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+    
+.active, .dot:hover {
+  background-color: #717171;
+}
+
+#panel, #flip {
+  padding: 5px;
+  text-align: center;
+  background-color: #e5eecc;
+  border: solid 1px #c3c3c3;
+}
+
+#panel {
+  padding: 50px;
+  display: none;
+}
 /* Set a style for all buttons */
-.loginmodal button:nth-child(1) {
-  background-color: #04AA6D;
+.loginmodal button:nth-child(2) {
+  background-color: red;
   color: white;
   padding: 14px 20px;
   margin: 8px 0;
@@ -167,104 +167,15 @@ input[type=text], input[type=password] {
   cursor: pointer;
   width: 100%;
 }
-
-button:hover {
-  opacity: 0.8;
-}
-
-/* Extra styles for the cancel button */
-.cancelbtn {
-  width: auto;
-  padding: 10px 18px;
-  background-color: #f44336;
-}
-
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-img.guest {
-  width: 40%;
-  border-radius: 50%;
-}
-
-.container {
-  padding: 16px;
-}
-
-span.psw {
-  float: right;
-  padding-top: 16px;
-}
-
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 60px;
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button (x) */
-.close {
-  position: absolute;
-  right: 25px;
-  top: 0;
-  color: #000;
-  font-size: 35px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: red;
+.loginmodal button:nth-child(1) {
+  background-color: green;
+  color: white;
+  padding: 14px 20px;
+  border: none;
   cursor: pointer;
+  width: 100%;
 }
 
-/* Add Zoom Animation */
-.animate {
-  -webkit-animation: animatezoom 0.6s;
-  animation: animatezoom 0.6s
-}
-
-@-webkit-keyframes animatezoom {
-  from {-webkit-transform: scale(0)} 
-  to {-webkit-transform: scale(1)}
-}
-  
-@keyframes animatezoom {
-  from {transform: scale(0)} 
-  to {transform: scale(1)}
-}
-
-/* Change styles for span and cancel button on extra small screens */
-@media screen and (max-width: 300px) {
-  span.psw {
-     display: block;
-     float: none;
-  }
-  .cancelbtn {
-     width: 100%;
-  }
-}
 /* Full-width input fields */
 input[type=text], input[type=password] {
   width: 100%;
@@ -286,18 +197,6 @@ button:hover {
   background-color: #f44336;
 }
 
-/* Center the image and position the close button */
-.imgcontainer {
-  text-align: center;
-  margin: 24px 0 12px 0;
-  position: relative;
-}
-
-img.avatar {
-  width: 40%;
-  border-radius: 50%;
-}
-
 .container {
   padding: 16px;
 }
@@ -311,21 +210,18 @@ span.psw {
 .modal {
   display: none; /* Hidden by default */
   position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
+  z-index: 1000; /* Sit on top */
   left: 0;
   top: 0;
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0,0,0); /* Fallback color */
-  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
-  padding-top: 60px;
+  padding-top: 150px;
 }
 
 /* Modal Content/Box */
 .modal-content {
-  background-color: #fefefe;
-  margin: 5% auto 15% auto; /* 5% from the top, 15% from the bottom and centered */
+  margin: 0% auto 0% auto; /* 5% from the top, 15% from the bottom and centered */
   border: 1px solid #888;
   width: 80%; /* Could be more or less, depending on screen size */
 }

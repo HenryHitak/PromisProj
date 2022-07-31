@@ -18,8 +18,17 @@
                 <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-btn">Login</button>
                 <!-- Login modal -->
                 <div id="id01" class="modal">
+
                 <form class="modal-content animate" action="blank" method="post" name="registerForm">
                     <div name="registerForm" class="container" ng-controller="regCtrl">
+
+                <form class="modal-content animate" action="blank" method="post">
+                    <div class="imgcontainer">
+                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
+                        <img src="./img/guest.png" alt="Avatar" class="avatar" style="width:300px">
+                    </div>
+                    <div class="container" style="width:700px">
+
                         <label for="uname"><b>Username</b></label>
                         <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="username" required>
                         <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >*Username should be filled*</p>
@@ -34,6 +43,10 @@
                         <span class="psw"><a href="#">Forgot password?</a></span>
                     </div>
 
+
+                    <div class="container" style="background-color:#f1f1f1">
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw">Forgot <a href="#">password?</a></span>
                     </div>
                 </form>
             </div>
@@ -160,7 +173,11 @@
         </section>
     </main>
     <footer>
+
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
+
+        All Rights Reserved &copy; Promis Team (2022) Tamwood College, Vancouver, BC
+
     </footer>
 </body>
 <script>

@@ -11,47 +11,33 @@
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <link rel="stylesheet" href="./css/stylesheet.css">
 </head>
-<body ng-app="regApp">
+<body ng-app="regApp" ng-controller="regCtrl">
     <header>
         <div class="btns">
             <div class="loginmodal">
-                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-btn">Login</button>
+                <button onclick="document.getElementById('log').style.display='block'" style="width:auto;" class="login-btn">Login</button>
                 <!-- Login modal -->
-                <div id="id01" class="modal">
-
+                <div id="log" class="modal">
                 <form class="modal-content animate" action="blank" method="post" name="registerForm">
-                    <div name="registerForm" class="container" ng-controller="regCtrl">
-
-                <form class="modal-content animate" action="blank" method="post">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                        <img src="./img/guest.png" alt="Avatar" class="avatar" style="width:300px">
-                    </div>
-                    <div class="container" style="width:700px">
-
+                    <div name="registerForm" class="container1" >
                         <label for="uname"><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="username" required>
+                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="regVal.usernameInput" required>
                         <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >*Username should be filled*</p>
                         <label for="psw"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" required>    
+                        <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
                         <label>
                             <input type="checkbox" checked="checked" name="remember"> Remember me
                         </label>
-                        <div class="container">
-                        <button type="submit">Login</button>
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <div class="container1">
+                        <button type="submit" >Login</button>
+                        <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
                         <span class="psw"><a href="#">Forgot password?</a></span>
-                    </div>
-
-
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                        <span class="psw">Forgot <a href="#">password?</a></span>
+                        </div>
                     </div>
                 </form>
             </div>
             
-            <a href="#" onclick="">Log out</a>
+            <a href="#" onclick="" ng-hide="" ng-show="">Log out</a>
             <button onclick=""><img src="./img/nicecart.png" class="cart"></button>
             <button onclick="">Check-out</button>
 
@@ -68,11 +54,6 @@
                 <span class="slider round"></span>
             </label>
         </div> -->
-
-        <div class="logoutmodal">
-
-        </div>
-
         <div class="cartModal">
 
         </div>
@@ -151,9 +132,21 @@
         </section>
         
         <section class="gameTable">
-
+            <div class="games" ng-repeat="data in textData">
+                <aside></aside>
+                <div>
+                    <span>Game: {{data.game_name}}</span>
+                    <span>company: {{data.game_company}}</span>
+                    <span>Price {{data.currency_dollar}}</span>
+                    <input type="checkbox">
+                </div>
+                <div class="buybut">
+                    <button type="button">Add to Cart</button>
+                    <button type="button">Purchase</button>
+                </div>
+            </div>
         </section>
-        <section class="cookiepolicy">
+        <section class="cookiepolicy" >
             <div id="cookieNotice" class="light display-right" style="display: none;">
                 <div id="closeIcon" style="display: none;">
                 </div>
@@ -162,10 +155,10 @@
                 </div>
                 <div class="content-wrap">
                     <div class="msg-wrap">
-                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
+                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="https://en.wikipedia.org/wiki/Privacy_policy">Privacy Policy</a></p>
                         <div class="btn-wrap">
-                            <button class="btn-primary" onclick="acceptCookieConsent();">Accept</button>
-                            <button class="btn-secondary" onclick="declineCookieConsent();">Decline</button>
+                            <button class="btn-primary" ng-click="acceptCookieConsent()">Accept</button>
+                            <button class="btn-secondary" ng-click="declineCookieConsent()">Decline</button>
                         </div>
                     </div>
                 </div>
@@ -173,83 +166,121 @@
         </section>
     </main>
     <footer>
-
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
-
-        All Rights Reserved &copy; Promis Team (2022) Tamwood College, Vancouver, BC
-
     </footer>
 </body>
+
 <script>
-//--------------------------Cookie consent popup-------------------------------//
-// Create cookie
-function setCookie(cname, cvalue, exdays) {
-    const d = new Date();
-    d.setTime(d.getTime() + (exdays*24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
-}
-
-// Delete cookie
-function deleteCookie(cname) {
-    const d = new Date();
-    d.setTime(d.getTime() + (24*60*60*1000));
-    let expires = "expires="+ d.toUTCString();
-    document.cookie = cname + "=;" + expires + ";path=/";
-}
-
-// Read cookie
-function getCookie(cname) {
-    let name = cname + "=";
-    let decodedCookie = decodeURIComponent(document.cookie);
-    let ca = decodedCookie.split(';');
-    for(let i = 0; i <ca.length; i++) {
-        let c = ca[i];
-        while (c.charAt(0) == ' ') {
-            c = c.substring(1);
-        }
-        if (c.indexOf(name) == 0) {
-            return c.substring(name.length, c.length);
-        }
-    }
-    return "";
-}
-
-// Set cookie consent
-function acceptCookieConsent(){
-    deleteCookie('user_cookie_consent');
-    setCookie('user_cookie_consent', 1, 30);
-    document.getElementById("cookieNotice").style.display = "none";
-}
-let cookie_consent = getCookie("user_cookie_consent");
-if(cookie_consent != ""){
-    document.getElementById("cookieNotice").style.display = "none";
-}else{
-    document.getElementById("cookieNotice").style.display = "block";
-}
-function declineCookieConsent(){
-    document.getElementById("cookieNotice").style.display = "none";
-}
-//---------------------------login and out-------------------------------------//
-// Get the modal
-var modal = document.getElementById('id01');
-
-// When the user clicks anywhere outside of the modal, close it
-window.onclick = function(event) {
-    if (event.target == modal) {
-        modal.style.display = "none";
-    }
-}
 let regApp = angular.module('regApp',[]);
-regApp.controller('regCtrl',($scope)=>{
-    console.log(registerForm.usernameInput);
+regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
+    $http.get("./app.json").then(
+    (res)=>{
+        $rootScope.textData = res.data;
+        console.log(res.data)
+    }
+    )
     switch(event.type){
 
     }
-    $scope.btnClick = () =>{
 
+    //---------------------------login and out-------------------------------------//
+    // Get the modal
+    // let modal = document.getElementById('log');
+    
+    // // When the user clicks anywhere outside of the modal, close it
+    // window.onclick = function(event) {
+    //     if (event.target == modal) {
+    //         modal.style.display = "none";
+    //     }
+    // }
+    
+    //--------------------------Cookie consent popup-------------------------------//
+    // Create cookie
+    let setCookie = (cname, cvalue, exdays)=> {
+        const d = new Date();
+        d.setTime(d.getTime() + (exdays*24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    }
+    
+    // Delete cookie
+    let deleteCookie=(cname) =>{
+        const d = new Date();
+        d.setTime(d.getTime() + (24*60*60*1000));
+        let expires = "expires="+ d.toUTCString();
+        document.cookie = cname + "=;" + expires + ";path=/";
+    }
+    
+    // Read cookie
+    let getCookie=(cname) =>{
+        let name = cname + "=";
+        let decodedCookie = decodeURIComponent(document.cookie);
+        let ca = decodedCookie.split(';');
+        for(let i = 0; i <ca.length; i++) {
+            let c = ca[i];
+            while (c.charAt(0) == ' ') {
+                c = c.substring(1);
+            }
+            if (c.indexOf(name) == 0) {
+                return c.substring(name.length, c.length);
+            }
+        }
+        return "";
+    }
+    // Set cookie consent
+    let acceptCookieConsent=()=>{
+        deleteCookie('user_cookie_consent');
+        setCookie('user_cookie_consent', 1, 30);
+        document.getElementById("cookieNotice").style.display = "none";
+    }
+    let cookie_consent = getCookie("user_cookie_consent");
+    if(cookie_consent != ""){
+        document.getElementById("cookieNotice").style.display = "none";
+    }else{
+        document.getElementById("cookieNotice").style.display = "block";
+    }
+    let declineCookieConsent=()=>{
+        document.getElementById("cookieNotice").style.display = "none";
     }
 })
+// app.controller('regCtrl', function($scope, $http) {
+// $scope.submit = function() {
+//  // alert("SUBMIT "+$scope.regVal.username);
+//   var stat="false";
+// angular.forEach($scope.mydata, function(item){
+//                   // alert(item.email);  
+//                   if((item.email==$scope.regVal.usernameInput)&&(item.Password==$scope.regVal.psw))
+//                   {
+//                     stat="true";
+//                   }
+
+
+//                });
+// $scope.regVal.usernameInput="";
+// $scope.regVal.psw="";
+//   if(stat=="true")
+//     alert("Success");
+//   else
+//     alert("Failure");
+//   };
+  
+//  $scope.regVal = {
+// 			"username" : "",
+// 			"password" : ""
+			
+// 		};
+// $scope.mydata;
+//   $http.get("/users.json")
+//   .then(function(response) {
+//       $scope.mydata = response.data;
+//        angular.forEach($scope.mydata, function(item){
+//                   // alert(item.email);  
+//                })
+      
+//   });
+  
+  
+// });
 //---------------------------calling the json file----------------------------------//
     //     let populate = (data)=>{
     //     let tbody = document.getElementsByTagName("tbody")[0];
@@ -311,8 +342,10 @@ regApp.controller('regCtrl',($scope)=>{
     }
 //------------------light dark mode -------------------------------------------------------//
     function myFunction() {
-   var element = document.body;
+   let element = document.body;
+   let el = document.getElementsByTagName('div');
    element.classList.toggle("dark-mode");
+   el.classList.toggle("dark-mode");
 }
 </script>
 </html>

@@ -132,12 +132,13 @@
         </section>
         
         <section class="gameTable">
-            <div class="games" ng-repeat="data in textData">
+            <input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
+            <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch" style="border: 1px solid black;">
                 <aside></aside>
-                <div>
-                    <span>Game: {{data.game_name}}</span>
-                    <span>company: {{data.game_company}}</span>
-                    <span>Price {{data.currency_dollar}}</span>
+                <div >
+                    <br><span>Game: {{data.game_name}}</span>
+                    <br><span>company: {{data.game_company}}</span>
+                    <br><span>Price: {{data.currency_dollar}}</span>
                     <input type="checkbox">
                 </div>
                 <div class="buybut">

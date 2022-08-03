@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="./jquery-3.6.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <style>
+        #carousel {width:100%; height:300px;}
+        #carousel #prev-button, #carousel #next-button {
+          position:absolute; top: 40%; font-size: 3em; color: #fff;
+        } 
+        #carousel #prev-button { left: 10px }
+        #carousel #next-button { right: 10px }
+        #carousel img {width: 100%; height: 100%;}
+        </style>
+</head>
+<body ng-app="myApp" ng-controller="TodoController">
+    <section id="carousel" ng-carousel
+      ng-swipe-right="curSlide=curSlide-1" 
+      ng-swipe-left="curSlide=curSlide+1">
+
+      <ul>
+        <li><img src="/Project/PromisProj/img/fifa.jpg" />
+        <li><img src="/Project/PromisProj/img/halo.jpg" />
+        <li><img src="/Project/PromisProj/img/mariobros.png" />
+        <li><img src="/Project/PromisProj/img/hayday.jpg" />
+      </ul>
+      
+      <div id="prev-button" ng-click="curSlide=curSlide-1"> &lt; </div>
+      
+      <div id="next-button" ng-click="curSlide=curSlide+1">&gt; </div>
+    </section>
+    <div data-pagination="" data-num-pages="numPages()" 
+      data-current-page="currentPage" data-max-size="maxSize"  
+      data-boundary-links="true"></div>
+  </body>
+<script>
+    var app = angular.module('myApp',['ngTouch']);
+    app.directive('ngCarousel', function() {
+      return function(scope, element, attrs) {
+        var el = element[0];
+        var containerEl = el.querySelector("ul");
+        var slidesEl = containerEl.querySelectorAll("li");
+        scope.numSlides = slidesEl.length;
+        scope.curSlide = 1;   
+        scope.$watch('curSlide', function(num) {
+          num = (num % scope.numSlides) + 1;
+          containerEl.style.left = (-1*100*(num-1)) + '%';
+        });
+        
+        el.style.position = 'relative';
+        el.style.overflow = 'hidden';
+
+        containerEl.style.position = 'absolute';
+        containerEl.style.width = (scope.numSlides*100)+'%';
+        containerEl.style.listStyleType = 'none';
+        containerEl.style.margin =0;
+        containerEl.style.padding=0;
+        containerEl.style.transition = '1s';
+        
+        for(var i=0; i<slidesEl.length; i++) {
+          var slideEl = slidesEl[i];
+          slideEl.style.display = 'inline-block';
+          slideEl.style.width = (100/scope.numSlides) + '%';
+        }
+      };
+    });
+</script>
+</html>

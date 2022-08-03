@@ -8,30 +8,26 @@
     <script src="./jquery-3.6.0.js"></script>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+<!--     
+    <link data-require="bootstrap-css@2.3.2" data-semver="2.3.2" rel="stylesheet" href="//netdna.bootstrapcdn.com/twitter-bootstrap/2.3.2/css/bootstrap-combined.min.css" />
+    <script data-require="angular.js@1.1.5" data-semver="1.1.5" src="http://code.angularjs.org/1.1.5/angular.min.js"></script>
+    <script data-require="angular-ui-bootstrap@0.3.0" data-semver="0.3.0" src="http://angular-ui.github.io/bootstrap/ui-bootstrap-tpls-0.3.0.min.js"></script>
+     -->
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
     <link rel="stylesheet" href="./css/stylesheet.css">
 </head>
-<body ng-app="regApp">
-    <header>
+<body ng-app="regApp" ng-controller="regController">
+    <header id="home">
         <div class="btns">
             <div class="loginmodal">
-                <button onclick="document.getElementById('id01').style.display='block'" style="width:auto;" class="login-btn">Login</button>
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;">Login</button>
                 <!-- Login modal -->
                 <div id="id01" class="modal">
-
                 <form class="modal-content animate" action="blank" method="post" name="registerForm">
                     <div name="registerForm" class="container" ng-controller="regCtrl">
-
-                <form class="modal-content animate" action="blank" method="post">
-                    <div class="imgcontainer">
-                        <span onclick="document.getElementById('id01').style.display='none'" class="close" title="Close Modal">&times;</span>
-                        <img src="./img/guest.png" alt="Avatar" class="avatar" style="width:300px">
-                    </div>
-                    <div class="container" style="width:700px">
-
                         <label for="uname"><b>Username</b></label>
                         <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="username" required>
-                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >*Username should be filled*</p>
+                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
                         <label for="psw"><b>Password</b></label>
                         <input type="password" placeholder="Enter Password" name="psw" required>    
                         <label>
@@ -43,17 +39,13 @@
                         <span class="psw"><a href="#">Forgot password?</a></span>
                     </div>
 
-
-                    <div class="container" style="background-color:#f1f1f1">
-                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
-                        <span class="psw">Forgot <a href="#">password?</a></span>
                     </div>
                 </form>
             </div>
             
             <a href="#" onclick="">Log out</a>
-            <button onclick=""><img src="./img/nicecart.png" class="cart"></button>
-            <button onclick="">Check-out</button>
+            <a href="#"><img src="./img/nicecart.png" class="cart" width="35" height="35"></a>
+            <button onclick="">Check out</button>
 
             <!-- <h5>Dark Mode</h5> -->
             Dark mode<label class="switch">
@@ -81,16 +73,14 @@
 
         </div>
     </header>
-            <nav>
-                <h1>
-                    Promise Menu
-                </h1>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#games">Games</a></li>
-                    <li><a href="#projects">About</a></li>
-                </ul>
-            </nav>
+            <aside>
+            <img src="./img//banner.jpg" class="banner" alt="Banner Image" width="100%" height="500" />
+        </aside>
+        <nav class="navbar">
+            <a href="#home"><b>Home</b></a>
+            <a href="#games"><b>Games</b></a>
+            <a href="#projects"><b>About</b></a>
+        </nav>
     <main>
         <!-- Carousel slider section -->
         <section class="container max-height d-flex align-items-center">
@@ -149,6 +139,11 @@
                 </button>
             </div>
         </section>
+
+        <!-- Pagination -->
+        <div data-pagination="" data-num-pages="numPages()" 
+      data-current-page="currentPage" data-max-size="maxSize"  
+      data-boundary-links="true"></div>
         
         <section class="gameTable">
 
@@ -171,16 +166,43 @@
                 </div>
             </div>
         </section>
+        <div>
+            <a href="#home" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
+        </div>
     </main>
     <footer>
-
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
-
-        All Rights Reserved &copy; Promis Team (2022) Tamwood College, Vancouver, BC
-
     </footer>
 </body>
 <script>
+// Pagination
+var reg = angular.module('regApp', ['ui.bootstrap']);
+
+reg.controller('regController', function($scope) {
+  $scope.currentPage = 1,
+  $scope.numPerPage = 10,
+  $scope.maxSize = 5;
+  
+  $scope.makeReg = function() {
+    $scope.reg = [];
+    for (i=1;i<=1000;i++) {
+      $scope.reg.push({ text:'reg '+i, done:false});
+    }
+  };
+  $scope.makeReg(); 
+  
+  $scope.numPages = function () {
+    return Math.ceil($scope.reg.length / $scope.numPerPage);
+  };
+  
+  $scope.$watch('currentPage + numPerPage', function() {
+    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+    , end = begin + $scope.numPerPage;
+    
+    $scope.filteredTodos = $scope.reg.slice(begin, end);
+  });
+});
+
 //--------------------------Cookie consent popup-------------------------------//
 // Create cookie
 function setCookie(cname, cvalue, exdays) {

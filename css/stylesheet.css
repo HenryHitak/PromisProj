@@ -55,11 +55,14 @@ footer {
   align-items: center;
   
 }
-.logout{
+.logout,.ckout{
+  display: flex;
+  align-items: center;
   text-decoration: none;
   color:white;
+  text-align: center;
 }
-.logout:hover{
+.logout:hover, .ckout:hover{
   color:#64ffda;
 }
 .btns {
@@ -67,8 +70,19 @@ footer {
   align-content: center;
   
 }
+.cart, .ckout{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0;
+  width: 13%;
+}
+.cart img{
+  width: 3vh;
+  height: 3vh;
+}
 
-.login-btn, .ckout, .cart {
+.login-btn {
   font-size: 15px;
   border-radius: 13%;
   width: 5%;
@@ -78,6 +92,17 @@ footer {
 .login-btn:hover{
   color: white;
 }
+.bns{
+  width: 30%;
+  height: 100%;
+  display: flex;
+  justify-content: space-evenly;
+}
+.ckout{
+  width: 10vh;
+  height: 5vh;
+}
+
 
 .back-to-top > a {
     background-color: steelblue;
@@ -453,6 +478,7 @@ input:checked + .slider:before {
   align-items: center;
   border: 1px solid #64ffda;
   flex-wrap: wrap;
+  color: white;
 }
 
 .games{
@@ -465,9 +491,7 @@ input:checked + .slider:before {
   align-items: center;
   padding: 1%;
 }
-.gm:hover{
-  background-color: rgb(124, 110, 210);
-}
+
 .gm{
   width: 100%;
   height: 100%;

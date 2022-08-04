@@ -10,6 +10,7 @@
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
+            <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.js"></script>
             <link rel="stylesheet" href="./css/stylesheet.css">
     </head>
     <body ng-app="regApp" ng-controller="regCtrl">
@@ -35,16 +36,17 @@
                         <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
                     <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
                     <span class="psw"><a href="#!metoo">Forgot password?</a></span>
+                    </div>
                 </div>
-            </div>
-        </form>
+            </form>
         </div>
-        <div>
+        <div class="bns">
             <a href="#" class="logout" ng-show="loginDone" ng-click="logOut()">Log out</a>
-            <button ng-show="loginDone"><img src="./img/cart.png" class="cart"></button>
-            <button ng-show="loginDone" class="ckout">Check-out</button>
+            <button ng-show="loginDone"class="cart"><img src="./img/cart.png" ></button>
+            <button ng-show="loginDone" class="ckout">Check Out</button>
         </div>
         <div>
+            <a id="dkmd"></a>
             <label class="switch">
             <input ng-click="myFunction()" type="checkbox">
             <span class="slider round"></span>
@@ -58,7 +60,7 @@
             <span class="slider round"></span>
         </label>
     </div> -->
-    <div class="cartModal">
+    <div class="cartModal"ng-click="showcart()">{{totalqty}}</div>
         <div ng-repeat="buy in cartList">
             <p>Game Name: {{buy.game_name}}</p>
             <p>App Language: {{buy.app_language}}</p>
@@ -68,150 +70,8 @@
             <p>Price: {{buy.currency_dollar}}</p>
         </div>
     </div>
-
-    <!-- <div class="checkoutmodal">
-        <section class="h-100 h-custom" style="background-color: #eee;">
-            <div class="container h-100 py-5">
-                <div class="row d-flex justify-content-center align-items-center h-100">
-                <div class="col">
-                    <div class="card shopping-cart" style="border-radius: 15px;">
-                    <div class="card-body text-black">
-
-                        <div class="row">
-                        <div class="col-lg-6 px-5 py-4">
-
-                            <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
-
-                            <div class="d-flex align-items-center mb-5">
-                            <div class="flex-shrink-0">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
-                                class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
-                                <h5 class="text-primary">Samsung Galaxy M11 64GB</h5>
-                                <h6 style="color: #9e9e9e;">Color: white</h6>
-                                <div class="d-flex align-items-center">
-                                <p class="fw-bold mb-0 me-5 pe-3">799$</p>
-                                <div class="def-number-input number-input safari_only">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                    class="minus"></button>
-                                    <input class="quantity fw-bold text-black" min="0" name="quantity" value="1"
-                                    type="number">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                    class="plus"></button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="d-flex align-items-center mb-5">
-                            <div class="flex-shrink-0">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/6.webp"
-                                class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
-                                <h5 class="text-primary">Headphones Bose 35 II</h5>
-                                <h6 style="color: #9e9e9e;">Color: Red</h6>
-                                <div class="d-flex align-items-center">
-                                <p class="fw-bold mb-0 me-5 pe-3">239$</p>
-                                <div class="def-number-input number-input safari_only">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                    class="minus"></button>
-                                    <input class="quantity fw-bold text-black" min="0" name="quantity" value="1"
-                                    type="number">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                    class="plus"></button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            <div class="d-flex align-items-center mb-5">
-                            <div class="flex-shrink-0">
-                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
-                                class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
-                            </div>
-                            <div class="flex-grow-1 ms-3">
-                                <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
-                                <h5 class="text-primary">iPad 9.7 6-gen WiFi 32GB</h5>
-                                <h6 style="color: #9e9e9e;">Color: rose pink</h6>
-                                <div class="d-flex align-items-center">
-                                <p class="fw-bold mb-0 me-5 pe-3">659$</p>
-                                <div class="def-number-input number-input safari_only">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
-                                    class="minus"></button>
-                                    <input class="quantity fw-bold text-black" min="0" name="quantity" value="2"
-                                    type="number">
-                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
-                                    class="plus"></button>
-                                </div>
-                                </div>
-                            </div>
-                            </div>
-
-                            <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
-
-                            <div class="d-flex justify-content-between px-x">
-                            <p class="fw-bold">Discount:</p>
-                            <p class="fw-bold">95$</p>
-                            </div>
-                            <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
-                            <h5 class="fw-bold mb-0">Total:</h5>
-                            <h5 class="fw-bold mb-0">2261$</h5>
-                            </div>
-
-                        </div>
-                        <div class="col-lg-6 px-5 py-4">
-                            <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
-                            <form class="mb-5">
-                            <div class="form-outline mb-5">
-                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
-                                value="1234 5678 9012 3457" minlength="19" maxlength="19" />
-                                <label class="form-label" for="typeText">Card Number</label>
-                            </div>
-
-                            <div class="form-outline mb-5">
-                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
-                                value="John Smith" />
-                                <label class="form-label" for="typeName">Name on card</label>
-                            </div>
-                            <div class="row">
-                                <div class="col-md-6 mb-5">
-                                <div class="form-outline">
-                                    <input type="text" id="typeExp" class="form-control form-control-lg" value="01/22"
-                                    size="7" id="exp" minlength="7" maxlength="7" />
-                                    <label class="form-label" for="typeExp">Expiration</label>
-                                </div>
-                                </div>
-                                <div class="col-md-6 mb-5">
-                                <div class="form-outline">
-                                    <input type="password" id="typeText" class="form-control form-control-lg"
-                                    value="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
-                                    <label class="form-label" for="typeText">Cvv</label>
-                                </div>
-                                </div>
-                            </div>
-                            <p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit <a
-                                href="#!">obcaecati sapiente</a>.</p>
-
-                            <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
-                            <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
-                                <a href="#!"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
-                            </h5>
-                            </form>
-                        </div>
-                        </div>
-                    </div>
-                    </div>
-                </div>
-                </div>
-            </div>
-        </section> -->
-    </div>
 </header>
-            <aside>
+        <aside>
             <img src="./img//banner.jpg" class="banner" alt="Banner Image" width="100%" height="500" />
         </aside>
         <nav class="navbar">
@@ -230,11 +90,36 @@
                 </li>
             </ul>
         </nav>
+       <!-- Carousel slider section -->
+ <section class="container max-height d-flex align-items-center">
+     <div id="carouselExampleCaptions" class="carousel slide" data-bs-interval="3000" data-bs-ride="carousel">
+         <div class="carousel-indicators">
+             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2"></button>
+             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-current="true" aria-label="Slide 3"></button>
+             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-current="true" aria-label="Slide 4"></button>
+             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-current="true" aria-label="Slide 5"></button>
+         </div>
+ <section id="carousel" ng-carousel
+   ng-swipe-right="curSlide=curSlide-1" 
+   ng-swipe-left="curSlide=curSlide+1">
+
+   <ul>
+     <li><img src="/Project/PromisProj/img/fifa.jpg" />
+     <li><img src="/Project/PromisProj/img/halo.jpg" />
+     <li><img src="/Project/PromisProj/img/mariobros.png" />
+     <li><img src="/Project/PromisProj/img/hayday.jpg" />
+   </ul>
+   
+   <div id="prev-button" ng-click="curSlide=curSlide-1"> &lt; </div>
+   
+   <div id="next-button" ng-click="curSlide=curSlide+1">&gt; </div>
+ </section>  
     <main ng-view>
        <!-- show contents from home, games, about -->
     </main>
     <div>
-        <a href="#" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
+        <a href="#dkmd" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
     </div>
     <footer>
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
@@ -243,7 +128,7 @@
 
 <script>
 // creating angular App
-let regApp = angular.module('regApp',["ngRoute"]);
+let regApp = angular.module('regApp',["ngRoute","ngAnimate"]);
 // making SPA
 regApp.config(($routeProvider)=>{
     $routeProvider
@@ -360,6 +245,9 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         }
         console.log($scope.cartList)
     } 
+
+//-----------------------------------------------details--------------------------------------------------//
+
 // app.controller('regCtrl', function($scope, $http) {
 // $scope.submit = function() {
 //  // alert("SUBMIT "+$scope.regVal.username);
@@ -488,32 +376,6 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     //     }
     //   };
     // });
-// pagination
-var reg = angular.module('regApp', ['ui.bootstrap']);
-
-reg.controller('regctrl', function($scope) {
-  $scope.currentPage = 1,
-  $scope.numPerPage = 10,
-  $scope.maxSize = 5;
-  
-  $scope.makeReg = function() {
-    $scope.reg = [];
-    for (i=1;i<=1000;i++) {
-      $scope.reg.push({ text:'reg '+i, done:false});
-    }
-  };
-  $scope.makeReg(); 
-  
-  $scope.numPages = function () {
-    return Math.ceil($scope.reg.length / $scope.numPerPage);
-  };
-  
-  $scope.$watch('currentPage + numPerPage', function() {
-    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
-    , end = begin + $scope.numPerPage;
     
-    $scope.filteredTodos = $scope.reg.slice(begin, end);
-  });
-});
 </script>
 </html>

@@ -5,220 +5,305 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Promis Gaming</title>
-    <script src="./jquery-3.6.0.js"></script>
+    <!-- <script src="./jquery-3.6.0.js"></scripst> -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">  
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
     <link rel="stylesheet" href="./css/stylesheet.css">
 </head>
 <body ng-app="regApp" ng-controller="regCtrl">
     <header>
-        <div class="btns">
-            <div class="loginmodal">
-                <button onclick="document.getElementById('log').style.display='block'" style="width:auto;" class="login-btn">Login</button>
-                <!-- Login modal -->
-                <div id="log" class="modal">
-                <form class="modal-content animate" action="blank" method="post" name="registerForm">
-                    <div name="registerForm" class="container1" >
-                        <label for="uname"><b>Username</b></label>
-                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="regVal.usernameInput" required>
-                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >*Username should be filled*</p>
-                        <label for="psw"><b>Password</b></label>
-                        <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
-                        <label>
-                            <input type="checkbox" checked="checked" name="remember"> Remember me
-                        </label>
-                        <div class="container1">
-                        <button type="submit" >Login</button>
-                        <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
-                        <span class="psw"><a href="#">Forgot password?</a></span>
+<div class="btns">
+    <div class="loginmodal">
+        <button onclick="document.getElementById('log').style.display='block'" style="width:auto;" class="login-btn" ng-hide="loginDone">Login</button>
+        <!-- Login modal -->
+        <div id="log" class="modal">
+        <form class="modal-content animate" action="blank" method="post" name="registerForm">
+            <div name="registerForm" class="container1" >
+                <label for="uname"><b>Username</b></label>
+                <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="regVal.usernameInput" required>
+                <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
+                <label for="psw"><b>Password</b></label>
+                <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
+                <label>
+                    <input type="checkbox" checked="checked" name="remember"> Remember me
+                </label>
+                <div class="container1">
+                    <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
+                    <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
+                    <span class="psw"><a href="#">Forgot password?</a></span>
+                </div>
+            </div>
+        </form>
+    </div>
+        <a href="#" ng-show="loginDone" ng-click="logOut()">Log out</a>
+        <button ng-show="loginDone"><img src="./img/cart.png" class="cart"></button>
+        <button ng-show="loginDone">Check-out</button>
+
+        <!-- <h5>Dark Mode</h5> -->
+        <label class="switch">
+            <input ng-click="myFunction()" type="checkbox">
+            <span class="slider round"></span>
+    </label>
+</div>
+    <!-- <div>
+        <h5>Dark Mode</h5>
+        <label class="switch">
+            <input onclick="myFunction()" type="checkbox">
+            <span class="slider round"></span>
+        </label>
+    </div> -->
+    <!-- <div class="cartModal">
+        <div ng-repeat="buy in cartList">
+            <p>Game Name: {{buy.game_name}}</p>
+            <p>App Language: {{buy.app_language}}</p>
+            <p>App Version: {{buy.app_ver}}</p>
+            <p>App Year: {{buy.app_year}}</p>
+            <p>Game Company: {{buy.game_company}}</p>
+            <p>Price: {{buy.currency_dollar}}</p>
+        </div>
+    </div> -->
+
+    <!-- <div class="checkoutmodal">
+        <section class="h-100 h-custom" style="background-color: #eee;">
+            <div class="container h-100 py-5">
+                <div class="row d-flex justify-content-center align-items-center h-100">
+                <div class="col">
+                    <div class="card shopping-cart" style="border-radius: 15px;">
+                    <div class="card-body text-black">
+
+                        <div class="row">
+                        <div class="col-lg-6 px-5 py-4">
+
+                            <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Your products</h3>
+
+                            <div class="d-flex align-items-center mb-5">
+                            <div class="flex-shrink-0">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/13.webp"
+                                class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
+                                <h5 class="text-primary">Samsung Galaxy M11 64GB</h5>
+                                <h6 style="color: #9e9e9e;">Color: white</h6>
+                                <div class="d-flex align-items-center">
+                                <p class="fw-bold mb-0 me-5 pe-3">799$</p>
+                                <div class="def-number-input number-input safari_only">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="minus"></button>
+                                    <input class="quantity fw-bold text-black" min="0" name="quantity" value="1"
+                                    type="number">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="plus"></button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-5">
+                            <div class="flex-shrink-0">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/6.webp"
+                                class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
+                                <h5 class="text-primary">Headphones Bose 35 II</h5>
+                                <h6 style="color: #9e9e9e;">Color: Red</h6>
+                                <div class="d-flex align-items-center">
+                                <p class="fw-bold mb-0 me-5 pe-3">239$</p>
+                                <div class="def-number-input number-input safari_only">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="minus"></button>
+                                    <input class="quantity fw-bold text-black" min="0" name="quantity" value="1"
+                                    type="number">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="plus"></button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                            <div class="d-flex align-items-center mb-5">
+                            <div class="flex-shrink-0">
+                                <img src="https://mdbcdn.b-cdn.net/img/Photos/Horizontal/E-commerce/Products/1.webp"
+                                class="img-fluid" style="width: 150px;" alt="Generic placeholder image">
+                            </div>
+                            <div class="flex-grow-1 ms-3">
+                                <a href="#!" class="float-end text-black"><i class="fas fa-times"></i></a>
+                                <h5 class="text-primary">iPad 9.7 6-gen WiFi 32GB</h5>
+                                <h6 style="color: #9e9e9e;">Color: rose pink</h6>
+                                <div class="d-flex align-items-center">
+                                <p class="fw-bold mb-0 me-5 pe-3">659$</p>
+                                <div class="def-number-input number-input safari_only">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepDown()"
+                                    class="minus"></button>
+                                    <input class="quantity fw-bold text-black" min="0" name="quantity" value="2"
+                                    type="number">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                    class="plus"></button>
+                                </div>
+                                </div>
+                            </div>
+                            </div>
+
+                            <hr class="mb-4" style="height: 2px; background-color: #1266f1; opacity: 1;">
+
+                            <div class="d-flex justify-content-between px-x">
+                            <p class="fw-bold">Discount:</p>
+                            <p class="fw-bold">95$</p>
+                            </div>
+                            <div class="d-flex justify-content-between p-2 mb-2" style="background-color: #e1f5fe;">
+                            <h5 class="fw-bold mb-0">Total:</h5>
+                            <h5 class="fw-bold mb-0">2261$</h5>
+                            </div>
+
+                        </div>
+                        <div class="col-lg-6 px-5 py-4">
+                            <h3 class="mb-5 pt-2 text-center fw-bold text-uppercase">Payment</h3>
+                            <form class="mb-5">
+                            <div class="form-outline mb-5">
+                                <input type="text" id="typeText" class="form-control form-control-lg" siez="17"
+                                value="1234 5678 9012 3457" minlength="19" maxlength="19" />
+                                <label class="form-label" for="typeText">Card Number</label>
+                            </div>
+
+                            <div class="form-outline mb-5">
+                                <input type="text" id="typeName" class="form-control form-control-lg" siez="17"
+                                value="John Smith" />
+                                <label class="form-label" for="typeName">Name on card</label>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-6 mb-5">
+                                <div class="form-outline">
+                                    <input type="text" id="typeExp" class="form-control form-control-lg" value="01/22"
+                                    size="7" id="exp" minlength="7" maxlength="7" />
+                                    <label class="form-label" for="typeExp">Expiration</label>
+                                </div>
+                                </div>
+                                <div class="col-md-6 mb-5">
+                                <div class="form-outline">
+                                    <input type="password" id="typeText" class="form-control form-control-lg"
+                                    value="&#9679;&#9679;&#9679;" size="1" minlength="3" maxlength="3" />
+                                    <label class="form-label" for="typeText">Cvv</label>
+                                </div>
+                                </div>
+                            </div>
+                            <p class="mb-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit <a
+                                href="#!">obcaecati sapiente</a>.</p>
+
+                            <button type="button" class="btn btn-primary btn-block btn-lg">Buy now</button>
+                            <h5 class="fw-bold mb-5" style="position: absolute; bottom: 0;">
+                                <a href="#!"><i class="fas fa-angle-left me-2"></i>Back to shopping</a>
+                            </h5>
+                            </form>
+                        </div>
                         </div>
                     </div>
-                </form>
+                    </div>
+                </div>
+                </div>
             </div>
-            
-            <a href="#" onclick="" ng-hide="" ng-show="">Log out</a>
-            <button onclick=""><img src="./img/nicecart.png" class="cart"></button>
-            <button onclick="">Check-out</button>
-
-            <!-- <h5>Dark Mode</h5> -->
-            Dark mode<label class="switch">
-                <input onclick="myFunction()" type="checkbox">
-                <span class="slider round"></span>
-            </label>
-        </div>
-        <!-- <div>
-            <h5>Dark Mode</h5>
-            <label class="switch">
-                <input onclick="myFunction()" type="checkbox">
-                <span class="slider round"></span>
-            </label>
-        </div> -->
-        <div class="cartModal">
-
-        </div>
-
-        <div class="checkoutmodal">
-
-        </div>
+        </section> -->
+    </div>
     </header>
-            <nav>
-                <h1>
-                    Promise Menu
-                </h1>
-                <ul>
-                    <li><a href="#home">Home</a></li>
-                    <li><a href="#games">Games</a></li>
-                    <li><a href="#projects">About</a></li>
-                </ul>
-            </nav>
-    <main>
-        <!-- Carousel slider section -->
-        <section class="container max-height d-flex align-items-center">
-            <div id="carouselExampleCaptions" class="carousel slide" data-bs-interval="3000" data-bs-ride="carousel">
-                <div class="carousel-indicators">
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-current="true" aria-label="Slide 3"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-current="true" aria-label="Slide 4"></button>
-                    <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-current="true" aria-label="Slide 5"></button>
-                </div>
-                <div class="carousel-inner">
-                    <div class="carousel-item active">
-                        <img src="./img/halo.jpg" class="d-block w-100" alt="Super Mario"/>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Halo</h3>
-                            <p>The legendary Halo series returns with the most expansive Master Chief campaign yet and a ground-breaking free to play multiplayer.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./img/fifa.jpg" class="d-block w-100" alt="Super Mario"/>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Fifa 23</h3>
-                            <p>FIFA 23 brings the game even closer to the real thing with fundamental gameplay advances and a new season of innovation.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="./img/mariobros.png" class="d-block w-100" alt="Super Mario"/>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Super Mario Bros</h3>
-                            <p>In this game you are playing the role of the Mario. You are going through the Mushroom Kingdom, surviving the forces of the antagonist Bowser, and saving.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/hayday.jpg" class="d-block w-100" alt="Hayday"/>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Hayday</h3>
-                            <p>Best. Farm. Ever! Create the perfect farming experience with friends and neighbors from around the world and customize your own slice of country paradise.</p>
-                        </div>
-                    </div>
-                    <div class="carousel-item">
-                        <img src="img/plants.jpg" class="d-block w-100" alt="Plants VS Zombie"/>
-                        <div class="carousel-caption d-none d-md-block">
-                            <h3>Plants VS Zombie</h3>
-                            <p>Play the hit action-strategy adventure where you meet, greet, and defeat legions of hilarious zombies from the dawn of time.</p>
-                        </div>
-                    </div>
-                </div>
-                <button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="prev">
-                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Previous</span>
-                </button>
-                <button class="carousel-control-next" type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide="next">
-                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                    <span class="visually-hidden">Next</span>
-                </button>
-            </div>
-        </section>
-        
-        <section class="gameTable">
-            <input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
-            <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch" style="border: 1px solid black;">
-                <aside></aside>
-                <div >
-                    <br><span>Game: {{data.game_name}}</span>
-                    <br><span>company: {{data.game_company}}</span>
-                    <br><span>Price: {{data.currency_dollar}}</span>
-                    <input type="checkbox">
-                </div>
-                <div class="buybut">
-                    <button type="button">Add to Cart</button>
-                    <button type="button">Purchase</button>
-                </div>
-            </div>
-        </section>
-        <section class="cookiepolicy" >
-            <div id="cookieNotice" class="light display-right" style="display: none;">
-                <div id="closeIcon" style="display: none;">
-                </div>
-                <div class="title-wrap">
-                    <h4>Cookie Consent</h4>
-                </div>
-                <div class="content-wrap">
-                    <div class="msg-wrap">
-                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="https://en.wikipedia.org/wiki/Privacy_policy">Privacy Policy</a></p>
-                        <div class="btn-wrap">
-                            <button class="btn-primary" ng-click="acceptCookieConsent()">Accept</button>
-                            <button class="btn-secondary" ng-click="declineCookieConsent()">Decline</button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
+            <aside>
+            <img src="./img//banner.jpg" class="banner" alt="Banner Image" width="100%" height="500" />
+        </aside>
+        <nav class="navbar">
+            <ul>
+                <li>
+                    <a href="#"><b>Home</b></a>
+                </li>
+                <li>
+                    <a href="#!games"><b>Games</b></a>
+                </li>
+                <li>
+                    <a href="#!about"><b>About</b></a>
+                </li>
+            </ul>
+        </nav>
+    <main ng-view>
+       <!-- show contents from home, games, about -->
     </main>
+    <div>
+        <a href="#" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
+    </div>
     <footer>
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
     </footer>
 </body>
 
 <script>
-let regApp = angular.module('regApp',[]);
+// creating angular App
+let regApp = angular.module('regApp',["ngRoute"]);
+// making SPA
+regApp.config(($routeProvider)=>{
+    $routeProvider
+    .when("/",{
+        templateUrl:"./SPA/home.html"
+    })
+    .when("/games",{
+        templateUrl:"./SPA/games.html"
+    })
+    .when("/about",{
+        templateUrl:"./SPA/about.html"
+    })
+    .when("/metoo",{
+        templateUrl:"./SPA/metoo.html"
+    })
+})
+// using cookie when running the app
+regApp.run(($rootScope)=>{
+    $rootScope.policy = true;})
 regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     $http.get("./app.json").then(
     (res)=>{
         $rootScope.textData = res.data;
-        console.log(res.data)
+        // console.log(res.data)
     }
     )
-    switch(event.type){
+    // switch(event.type){
 
-    }
+    // }
 
     //---------------------------login and out-------------------------------------//
-    // Get the modal
-    // let modal = document.getElementById('log');
-    
-    // // When the user clicks anywhere outside of the modal, close it
-    // window.onclick = function(event) {
-    //     if (event.target == modal) {
-    //         modal.style.display = "none";
-    //     }
-    // }
-    
-    //--------------------------Cookie consent popup-------------------------------//
+    // Get the modal    
+    // When the user clicks anywhere outside of the modal, close it
+    $scope.clklog=()=>{
+        $scope.modal=true;
+    }
+    $scope.loginDone = false;
+        $scope.loginEnter = ()=>{
+            $scope.loginDone = true;
+        }
+        $scope.logOut = ()=>{
+            $scope.loginDone = false;
+        }
+    // --------------------------Cookie consent popup-------------------------------//
     // Create cookie
-    let setCookie = (cname, cvalue, exdays)=> {
-        const d = new Date();
-        d.setTime(d.getTime() + (exdays*24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+    $scope.setCookie = (cname, cvalue, exdays)=> {
+        $scope.d = new Date();
+        $scope.d.setTime($scope.d.getTime() + (exdays*24*60*60*1000));
+        $scope.expires = "expires="+ $scope.d.toUTCString();
+        $scope.document.cookie = cname + "=" + cvalue + ";" + $scope.expires + ";path=/";
     }
     
     // Delete cookie
-    let deleteCookie=(cname) =>{
-        const d = new Date();
-        d.setTime(d.getTime() + (24*60*60*1000));
-        let expires = "expires="+ d.toUTCString();
-        document.cookie = cname + "=;" + expires + ";path=/";
+    $scope.deleteCookie=(cname) =>{
+        $scope.d = new Date();
+        $scope.d.setTime($scope.d.getTime() + (24*60*60*1000));
+        $scope.expires = "expires="+ $scope.d.toUTCString();
+        $scope.document.cookie = cname + "=;" + $scope.expires + ";path=/";
     }
     
     // Read cookie
-    let getCookie=(cname) =>{
-        let name = cname + "=";
-        let decodedCookie = decodeURIComponent(document.cookie);
-        let ca = decodedCookie.split(';');
-        for(let i = 0; i <ca.length; i++) {
-            let c = ca[i];
+    $scope.getCookie=(cname) =>{
+        $scope.name = cname + "=";
+        $scope.decodedCookie = decodeURIComponent(document.cookie);
+        $scope.ca = decodedCookie.split(';');
+        for($scope.i = 0; i <ca.length; i++) {
+            $scope.c = ca[i];
             while (c.charAt(0) == ' ') {
                 c = c.substring(1);
             }
@@ -229,21 +314,43 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         return "";
     }
     // Set cookie consent
-    let acceptCookieConsent=()=>{
-        deleteCookie('user_cookie_consent');
-        setCookie('user_cookie_consent', 1, 30);
-        document.getElementById("cookieNotice").style.display = "none";
+    $scope.acceptCookieConsent=()=>{
+        $scope.deleteCookie('user_cookie_consent');
+        $scope.setCookie('user_cookie_consent', 1, 30);
+        // document.getElementById("cookieNotice").style.display = "none";
+        $scope.policy = false;
     }
-    let cookie_consent = getCookie("user_cookie_consent");
-    if(cookie_consent != ""){
-        document.getElementById("cookieNotice").style.display = "none";
-    }else{
-        document.getElementById("cookieNotice").style.display = "block";
-    }
-    let declineCookieConsent=()=>{
-        document.getElementById("cookieNotice").style.display = "none";
+    // $scope.cookie_consent = getCookie("user_cookie_consent");
+    // if(cookie_consent != ""){
+    //     // document.getElementById("cookieNotice").style.display = "none";
+    // }else{
+    //     // document.getElementById("cookieNotice").style.display = "block";
+    // }
+    // $scope.declineCookieConsent=()=>{
+    //     // document.getElementById("cookieNotice").style.display = "none";
+    // }
+    //------------------light dark mode -------------------------------------------------------//
+    $scope.myFunction=()=> {
+        $scope.element = document.body;
+        $scope.element1 = document.header;
+        console.log(document.body);
+        // $scope.el = document.getElementsByTagName('div');
+        $scope.element.classList.toggle("dark-mode");
+        $scope.element1.classList.toggle("dark-mode");
     }
 })
+
+// --------------------------------------------------------add to cart----------------------------//
+    $scope.cartList = [];
+    $scope.addCart = ()=>{
+        let buyItemName = event.target.value
+        for(let object of $rootScope.textData){
+            if(object.game_name == buyItemName){
+                $scope.cartList.push(object)
+            }
+        }
+        console.log($scope.cartList)
+    } 
 // app.controller('regCtrl', function($scope, $http) {
 // $scope.submit = function() {
 //  // alert("SUBMIT "+$scope.regVal.username);
@@ -283,13 +390,13 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
   
 // });
 //---------------------------calling the json file----------------------------------//
-    //     let populate = (data)=>{
-    //     let tbody = document.getElementsByTagName("tbody")[0];
-    //     let datas = JSON.parse(data)
-    //     for (let obj of datas){
-    //         let tr = document.createElement('tr');
-    //         for (let prop in obj){
-    //             let td = document.createElement("td");
+    //     $scope.populate = (data)=>{
+    //     $scope.tbody = document.getElementsByTagName("tbody")[0];
+    //     $scope.datas = JSON.parse(data)
+    //     for ($scope.obj of datas){
+    //         $scope.tr = document.createElement('tr');
+    //         for ($scope.prop in obj){
+    //             $scope.td = document.createElement("td");
     //             td.innerText = obj[prop];
     //             tr.appendChild(td);
     //         }
@@ -297,8 +404,8 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     //     }
     // }
     // async function loadJson(){
-    // let ajaxPromise = new Promise ((resolve,reject)=>{
-    //     let req = new XMLHttpRequest();
+    // $scope.ajaxPromise = new Promise ((resolve,reject)=>{
+    //     $scope.req = new XMLHttpRequest();
     //     req.open("GET","./data.json");
     //     req.onload = () =>{
     //         if(req.status==200){
@@ -326,27 +433,78 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
 //   });
 // });
 //-----------------slide show--------------------------------------------------------------//
-    let slides = document.getElementsByClassName("mySlides");
-    let activeIndex = 0;
-    showSlides(activeIndex);
-    function showSlides(slideCounter){
-        activeIndex += slideCounter;
-        if(activeIndex>=slides.length) {
-            activeIndex = 0;
-        }else if(activeIndex<0){
-            activeIndex = slides.length -1;
-        }
-        for (let i=0;i<slides.length;i++){
-            slides[i].style.display = "none";//hide all the slides
-        }
-        slides[activeIndex].style.display = "block";//only show the active slide
+    // $scope.slides = document.getElementsByClassName("mySlides");
+    // $scope.activeIndex = 0;
+    // showSlides(activeIndex);
+    // function showSlides(slideCounter){
+    //     activeIndex += slideCounter;
+    //     if(activeIndex>=slides.length) {
+    //         activeIndex = 0;
+    //     }else if(activeIndex<0){
+    //         activeIndex = slides.length -1;
+    //     }
+    //     for ($scope.i=0;i<slides.length;i++){
+    //         slides[i].style.display = "none";//hide all the slides
+    //     }
+    //     slides[activeIndex].style.display = "block";//only show the active slide
+    // }
+
+    //     var app = angular.module('myApp',['ngTouch']);
+    // app.directive('ngCarousel', function() {
+    //   return function(scope, element, attrs) {
+    //     var el = element[0];
+    //     var containerEl = el.querySelector("ul");
+    //     var slidesEl = containerEl.querySelectorAll("li");
+    //     scope.numSlides = slidesEl.length;
+    //     scope.curSlide = 1;   
+    //     scope.$watch('curSlide', function(num) {
+    //       num = (num % scope.numSlides) + 1;
+    //       containerEl.style.left = (-1*100*(num-1)) + '%';
+    //     });
+        
+    //     el.style.position = 'relative';
+    //     el.style.overflow = 'hidden';
+
+    //     containerEl.style.position = 'absolute';
+    //     containerEl.style.width = (scope.numSlides*100)+'%';
+    //     containerEl.style.listStyleType = 'none';
+    //     containerEl.style.margin =0;
+    //     containerEl.style.padding=0;
+    //     containerEl.style.transition = '1s';
+        
+    //     for(var i=0; i<slidesEl.length; i++) {
+    //       var slideEl = slidesEl[i];
+    //       slideEl.style.display = 'inline-block';
+    //       slideEl.style.width = (100/scope.numSlides) + '%';
+    //     }
+    //   };
+    // });
+// pagination
+var reg = angular.module('regApp', ['ui.bootstrap']);
+
+reg.controller('regctrl', function($scope) {
+  $scope.currentPage = 1,
+  $scope.numPerPage = 10,
+  $scope.maxSize = 5;
+  
+  $scope.makeReg = function() {
+    $scope.reg = [];
+    for (i=1;i<=1000;i++) {
+      $scope.reg.push({ text:'reg '+i, done:false});
     }
-//------------------light dark mode -------------------------------------------------------//
-    function myFunction() {
-   let element = document.body;
-   let el = document.getElementsByTagName('div');
-   element.classList.toggle("dark-mode");
-   el.classList.toggle("dark-mode");
-}
+  };
+  $scope.makeReg(); 
+  
+  $scope.numPages = function () {
+    return Math.ceil($scope.reg.length / $scope.numPerPage);
+  };
+  
+  $scope.$watch('currentPage + numPerPage', function() {
+    var begin = (($scope.currentPage - 1) * $scope.numPerPage)
+    , end = begin + $scope.numPerPage;
+    
+    $scope.filteredTodos = $scope.reg.slice(begin, end);
+  });
+});
 </script>
 </html>

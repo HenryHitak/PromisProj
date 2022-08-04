@@ -1,0 +1,38 @@
+ <section class="gameTable" ng-controller="regCtrl">
+        <input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
+        <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch" style="border: 1px solid black;">
+            <img src="{{data.img}}" style="width:300px"></img>
+            <div >
+                <br><span>Game: {{data.game_name}}</span>
+                <br><span>company: {{data.game_company}}</span>
+                <br><span>Price: {{data.currency_dollar}}</span>
+                <input type="checkbox">
+            </div>
+            <div class="buybut">
+                <button type="button">Add to Cart</button>
+                <button type="button">Purchase</button>
+            </div>
+        </div>
+        <!-- Pagination -->
+    <div data-pagination="" data-num-pages="numPages()" 
+    data-current-page="currentPage" data-max-size="maxSize"  
+    data-boundary-links="true"></div>
+    </section>
+    <section class="cookiepolicy">
+        <div id="cookieNotice" class="light display-right" style="display: none;">
+            <div id="closeIcon" style="display: none;">
+            </div>
+            <div class="title-wrap">
+                <h4>Cookie Consent</h4>
+            </div>
+            <div class="content-wrap">
+                <div class="msg-wrap">
+                    <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
+                    <div class="btn-wrap">
+                        <button class="btn-primary" onclick="acceptCookieConsent();">Accept</button>
+                        <button class="btn-secondary" onclick="declineCookieConsent();">Decline</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>

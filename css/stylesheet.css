@@ -3,18 +3,19 @@
   padding: 0;
 }
 html{
-    scroll-behavior: smooth;
+  scroll-behavior: smooth;
 }
 main{
   height: 100%;
   width: 100%;
+  padding: 1%;
 }
 h1 {
   color: #f44336;
 }
 
 body {
-  background-color: white;
+  background-color: slateblue;
   color: black;
   font-size: 18px;
   display: flex;
@@ -24,20 +25,21 @@ body {
 }
 
 header {
-  width: 100%;
-  height: 10vh;
-  padding: 4%;
-  background-color: slategrey;
+  padding: 2%;
   display: flex;
   flex-direction: row;
   justify-content: flex-end;
 }
+
 a{
   text-decoration: none;
 }
-button{
-  outline: none;
-  border: 0.5px solid darkgray;
+button {
+  color: white;
+  background-color:midnightblue;
+  padding: 2%;
+  border-radius: 10%;
+  border: none;
 }
 
 footer {
@@ -50,6 +52,12 @@ footer {
   display: flex;
   justify-content: center;
   align-items: center;
+}
+
+.btns {
+  width: 45%;
+  align-content: center;
+  
 }
 
 .login-btn {
@@ -75,7 +83,6 @@ footer {
     color: #64ffda;
 }
 /* //light mode colour//
-
 //darkmode colour// */
 /* $defaultFont: "PT Serif", serif;
 $defaulFontColor: #ccd6f6;
@@ -88,8 +95,16 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
 .dark-mode {
   background-color: rgb(17, 34, 64);
   color: #64ffda;
-}
+  border: 1px solid #64ffda;
 
+}
+#carousel {width:100%; height:300px;}
+#carousel #prev-button, #carousel #next-button {
+  position:absolute; top: 40%; font-size: 3em; color: #fff;
+} 
+#carousel #prev-button { left: 10px }
+#carousel #next-button { right: 10px }
+#carousel img {width: 100%; height: 100%;}
 #carouselExampleCaptions {
   overflow: hidden;
 }
@@ -168,8 +183,30 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   padding: 50px;
   display: none;
 }
-/* Set a style for all buttons */
-.loginmodal button:nth-child(2) {
+
+.backToTop {
+  width: 100px;
+  height: 40px;
+  padding-bottom: 4.5%;
+  /* color: white;
+  background-color: mediumturquoise; */
+  position: fixed;
+  bottom: 0;
+  right: 0;
+  margin: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.loginmodal {
+  width: 100%;
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+/* .loginmodal button:nth-child(2) {
   background-color: red;
   color: white;
   padding: 14px 20px;
@@ -185,7 +222,47 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   border: none;
   cursor: pointer;
   width: 100%;
+} */
+nav {
+  margin: 0;
+  padding:0;
+  background-color: #64ffda;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
+ul{
+  margin:0;
+  padding: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  list-style: none;
+  align-items: center;
+  justify-content: center;
+}
+li {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-decoration: none;
+}
+li:hover{
+  width: 100%;
+  height: 100%;
+  background-color: #1aa786;
+}
+li> a {
+  width: 100%;
+  height: 100%;
+  text-decoration: none;
+  text-align: center;
+}
+
 
 /* Full-width input fields */
 input[type=text], input[type=password] {
@@ -209,8 +286,22 @@ button:hover {
 }
 
 .container1 {
-  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  padding: 1%;
   background-color: slategray;
+}
+.container1 button{
+  display: flex;
+  align-items: center;
+  text-align: center;
+  justify-content: center;
+  width: 90px;
+  height: 40px;
+  padding: 0;
 }
 
 span.psw {
@@ -220,7 +311,7 @@ span.psw {
 
 /* The Modal (background) */
 .modal {
-  display: none; /* Hidden by default */
+  /* display:flex; Hidden by default */
   position: fixed; /* Stay in place */
   z-index: 1000; /* Sit on top */
   left: 0;
@@ -342,7 +433,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .gameTable{
-  width: 100%;
+  margin-left: 5%;
+  width: 90%;
   height: 100%;
   display: flex; 
   justify-content: space-between;
@@ -350,18 +442,21 @@ input:checked + .slider:before {
   border: 1px solid black;
   flex-wrap: wrap;
 }
+.gameTable > input{
+  margin-left: 10px;
+}
 .games{
-  width: 60vh;
+  width: 50%;
   height: 30vh;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-evenly;
   align-items: center;
 }
 .buybut{
   display: flex;
   flex-direction: column;
-  justify-content: space-evenly;
-  width: 100%;
+  justify-content: center;
+  width: 10%;
   height: 100%;
   align-items: flex-end;
 }
@@ -370,4 +465,137 @@ input:checked + .slider:before {
   height: 30px;
   display: flex;
   text-align: center;
+  justify-content: center;
 }
+
+.about-title {
+    padding-top: 5%;
+}
+.about-text {
+    padding: 2% 15% 5% 15%;
+    display: flex;
+    color: white;
+}
+
+/* adding css for checkout */
+@media (min-width: 1025px) {
+.h-custom {
+height: 100vh !important;
+}
+}
+
+.number-input input[type="number"] {
+-webkit-appearance: textfield;
+-moz-appearance: textfield;
+appearance: textfield;
+}
+
+.number-input input[type=number]::-webkit-inner-spin-button,
+.number-input input[type=number]::-webkit-outer-spin-button {
+-webkit-appearance: none;
+}
+
+.number-input button {
+-webkit-appearance: none;
+background-color: transparent;
+border: none;
+align-items: center;
+justify-content: center;
+cursor: pointer;
+margin: 0;
+position: relative;
+}
+
+.number-input button:before,
+.number-input button:after {
+display: inline-block;
+position: absolute;
+content: '';
+height: 2px;
+transform: translate(-50%, -50%);
+}
+
+.number-input button.plus:after {
+transform: translate(-50%, -50%) rotate(90deg);
+}
+
+.number-input input[type=number] {
+text-align: center;
+}
+
+.number-input.number-input {
+border: 1px solid #ced4da;
+width: 10rem;
+border-radius: .25rem;
+}
+
+.number-input.number-input button {
+width: 2.6rem;
+height: .7rem;
+}
+
+.number-input.number-input button.minus {
+padding-left: 10px;
+}
+
+.number-input.number-input button:before,
+.number-input.number-input button:after {
+width: .7rem;
+background-color: #495057;
+}
+
+.number-input.number-input input[type=number] {
+max-width: 4rem;
+padding: .5rem;
+border: 1px solid #ced4da;
+border-width: 0 1px;
+font-size: 1rem;
+height: 2rem;
+color: #495057;
+}
+
+@media not all and (min-resolution:.001dpcm) {
+@supports (-webkit-appearance: none) and (stroke-color:transparent) {
+
+.number-input.def-number-input.safari_only button:before,
+.number-input.def-number-input.safari_only button:after {
+margin-top: -.3rem;
+}
+}
+}
+
+.shopping-cart .def-number-input.number-input {
+border: none;
+}
+
+.shopping-cart .def-number-input.number-input input[type=number] {
+max-width: 2rem;
+border: none;
+}
+
+.shopping-cart .def-number-input.number-input input[type=number].black-text,
+.shopping-cart .def-number-input.number-input input.btn.btn-link[type=number],
+.shopping-cart .def-number-input.number-input input.md-toast-close-button[type=number]:hover,
+.shopping-cart .def-number-input.number-input input.md-toast-close-button[type=number]:focus {
+color: #212529 !important;
+}
+
+.shopping-cart .def-number-input.number-input button {
+width: 1rem;
+}
+
+.shopping-cart .def-number-input.number-input button:before,
+.shopping-cart .def-number-input.number-input button:after {
+width: .5rem;
+}
+
+.shopping-cart .def-number-input.number-input button.minus:before,
+.shopping-cart .def-number-input.number-input button.minus:after {
+background-color: #9e9e9e;
+}
+
+.shopping-cart .def-number-input.number-input button.plus:before,
+.shopping-cart .def-number-input.number-input button.plus:after {
+background-color: #4285f4;
+}
+/* checkout end */

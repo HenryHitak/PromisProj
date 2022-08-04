@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Us</title>
+    <script src="./jquery-3.6.0.js"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx" crossorigin="anonymous">  
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-A3rJD856KowSb7dwlZdYEkO39Gagi7vIsF0jrRAoQmDKKtQBHUuLZ9AsSv4jD4Xa" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+    <link rel="stylesheet" href="./css/stylesheet.css">
+    <style>
+        .about-title {
+            padding-top: 5%;
+        }
+        .about-text {
+            padding: 2% 15% 5% 15%;
+            display: flex;
+        }
+    </style>
+</head>
+<body ng-app="regApp" ng-controller="regController">
+    <header id="home">
+        <div class="btns">
+            <div class="loginmodal">
+                <button onclick="document.getElementById('id01').style.display='block'" style="width:80px;">Login</button>
+                <!-- Login modal -->
+                <div id="id01" class="modal">
+                <form class="modal-content animate" action="blank" method="post" name="registerForm">
+                    <div name="registerForm" class="container" ng-controller="regCtrl">
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="username" required>
+                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" required>    
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                        <div class="container">
+                        <button type="submit">Login</button>
+                        <button type="button" onclick="document.getElementById('id01').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw"><a href="#">Forgot password?</a></span>
+                    </div>
+
+                    </div>
+                </form>
+            </div>
+            
+            <a href="#" onclick="">Log out</a>
+            <a href="#"><img src="./img/nicecart.png" class="cart" width="35" height="35"></a>
+            <button onclick="">Check out</button>
+
+            <!-- <h5>Dark Mode</h5> -->
+            Dark mode<label class="switch">
+                <input onclick="myFunction()" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div>
+        <!-- <div>
+            <h5>Dark Mode</h5>
+            <label class="switch">
+                <input onclick="myFunction()" type="checkbox">
+                <span class="slider round"></span>
+            </label>
+        </div> -->
+
+        <div class="logoutmodal">
+
+        </div>
+
+        <div class="cartModal">
+
+        </div>
+
+        <div class="checkoutmodal">
+
+        </div>
+    </header>
+            <aside>
+            <img src="./img//banner.jpg" class="banner" alt="Banner Image" width="100%" height="500" />
+        </aside>
+        <nav class="navbar">
+            <a href="#home"><b>Home</b></a>
+            <a href="#games"><b>Games</b></a>
+            <a href="#projects"><b>About</b></a>
+        </nav>
+    <main>
+        <article class="about">
+            <h1 class="about-title">About Us</h1>
+            <p class="about-text">
+                At Promis®, we honor the multi-faceted interests of a diverse world of gamers. We know that game enthusiasts, from casual to hardcore, often want guidance. We deliver a broad offering of new game strategy and news and an unrivaled library of original strategy guides. Our core mission has not changed—we will always strive to provide the highest-quality content for our strategy guides.
+                <br/><br/><br/>
+                Promis® is the world’s most well-known brand in strategy content for PC, mobile, and console video games. Our strategy guides have been helping gamers to go from completing games to conquering games since 1990. We deliver a full gamut of video game guidance and information, from in-depth to quick tips, from news about upcoming games to professional strategy guides. We believe that all gamers, from casual to hardcore, benefit from high-quality guides to enhance their gaming experience.  
+            </p>
+        </article>
+
+        <section class="cookiepolicy">
+            <div id="cookieNotice" class="light display-right" style="display: none;">
+                <div id="closeIcon" style="display: none;">
+                </div>
+                <div class="title-wrap">
+                    <h4>Cookie Consent</h4>
+                </div>
+                <div class="content-wrap">
+                    <div class="msg-wrap">
+                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
+                        <div class="btn-wrap">
+                            <button class="btn-primary" onclick="acceptCookieConsent();">Accept</button>
+                            <button class="btn-secondary" onclick="declineCookieConsent();">Decline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <div>
+            <a href="#home" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
+        </div>
+    </main>
+    <footer>
+        All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
+    </footer>
+</body>
+</html>

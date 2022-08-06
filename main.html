@@ -42,7 +42,7 @@
         </div>
         <div class="bns">
             <a href="#" class="logout" ng-show="loginDone" ng-click="logOut()">Log out</a>
-            <button ng-show="loginDone"class="cart"><img src="./img/cart.png" ></button>
+            <button ng-show="loginDone"class="cart" onclick="document.getElementById('cartModal').style.display='block'" ng-click="chkEmp()"><img src="./img/cart.png" ></button>
             <button ng-show="loginDone" class="ckout">Check Out</button>
         </div>
         <div>
@@ -236,6 +236,28 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
             }
             console.log($scope.itemList)
         }
+    // --------------------------------------------------------cart button----------------------------//
+        $rootScope.cartList = [];
+    $scope.addCart = ()=>{
+        let buyItemName = event.target.value
+        for(let object of $rootScope.textData){
+            if(object.game_name == buyItemName){
+                $rootScope.cartList.push(object)
+            }
+        }
+    }
+
+    $scope.chkEmp = ()=>{
+        if($rootScope.cartList.length == 0){
+            $scope.showWarn = true;
+            $scope.showCart = false;
+        }
+        else{
+            $scope.showWarn = false;
+            $scope.showCart = true;
+        }
+           console.log($scope.cartList)
+    }
 })
 
 

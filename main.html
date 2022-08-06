@@ -11,11 +11,11 @@
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.js"></script>
+            <script src="./jquery-3.6.0.js"></script>
             <link rel="stylesheet" href="./css/stylesheet.css">
     </head>
     <body ng-app="regApp" ng-controller="regCtrl">
         <header>
-
         <!-- <h5>Dark Mode</h5> -->
         <div class="btns">
             <div class="loginmodal">
@@ -90,37 +90,30 @@
                 </li>
             </ul>
         </nav>
-       <!-- Carousel slider section -->
- <section class="container max-height d-flex align-items-center">
-     <div id="carouselExampleCaptions" class="carousel slide" data-bs-interval="3000" data-bs-ride="carousel">
-         <div class="carousel-indicators">
-             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
-             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="1" aria-current="true" aria-label="Slide 2"></button>
-             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="2" aria-current="true" aria-label="Slide 3"></button>
-             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="3" aria-current="true" aria-label="Slide 4"></button>
-             <button type="button" data-bs-target="#carouselExampleCaptions" data-bs-slide-to="4" aria-current="true" aria-label="Slide 5"></button>
-         </div>
- <section id="carousel" ng-carousel
-   ng-swipe-right="curSlide=curSlide-1" 
-   ng-swipe-left="curSlide=curSlide+1">
-
-   <ul>
-     <li><img src="/Project/PromisProj/img/fifa.jpg" />
-     <li><img src="/Project/PromisProj/img/halo.jpg" />
-     <li><img src="/Project/PromisProj/img/mariobros.png" />
-     <li><img src="/Project/PromisProj/img/hayday.jpg" />
-   </ul>
-   
-   <div id="prev-button" ng-click="curSlide=curSlide-1"> &lt; </div>
-   
-   <div id="next-button" ng-click="curSlide=curSlide+1">&gt; </div>
- </section>  
+        <div>
+            <a href="#dkmd" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
+        </div>
     <main ng-view>
        <!-- show contents from home, games, about -->
     </main>
-    <div>
-        <a href="#dkmd" class="backToTop"><img src="./img/top.png" width="50" height="50"></a>
-    </div>
+            <section class="cookiepolicy">
+            <div id="cookieNotice" class="light display-right" style="display: none;">
+                <div id="closeIcon" style="display: none;">
+                </div>
+                <div class="title-wrap">
+                    <h4>Cookie Consent</h4>
+                </div>
+                <div class="content-wrap">
+                    <div class="msg-wrap">
+                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
+                        <div class="btn-wrap">
+                            <button class="btn-primary" ng-click="acceptCookieConsent()">Accept</button>
+                            <button class="btn-secondary" ng-click="declineCookieConsent()">Decline</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
     <footer>
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
     </footer>
@@ -177,7 +170,7 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         }
     // --------------------------Cookie consent popup-------------------------------//
     // Create cookie
-    $scope.setCookie = (cname, cvalue, exdays)=> {
+$scope.setCookie = (cname, cvalue, exdays)=> {
         $scope.d = new Date();
         $scope.d.setTime($scope.d.getTime() + (exdays*24*60*60*1000));
         $scope.expires = "expires="+ $scope.d.toUTCString();
@@ -231,20 +224,20 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         // $scope.el = document.getElementsByTagName('div');
         $scope.element.classList.toggle("dark-mode");
     }
-    
+    // --------------------------------------------------------add to cart----------------------------//
+    $scope.itemList = [];
+        $scope.showItem = ()=>{
+            $scope.itemList.length = 0;
+            let buyItemName = event.target.value
+            for(let object of $rootScope.textData){
+                if(object.game_name == buyItemName){
+                    $scope.itemList.push(object)
+                }
+            }
+            console.log($scope.itemList)
+        }
 })
 
-// --------------------------------------------------------add to cart----------------------------//
-    $scope.cartList = [];
-    $scope.addCart = ()=>{
-        let buyItemName = event.target.value
-        for(let object of $rootScope.textData){
-            if(object.game_name == buyItemName){
-                $scope.cartList.push(object)
-            }
-        }
-        console.log($scope.cartList)
-    } 
 
 //-----------------------------------------------details--------------------------------------------------//
 
@@ -329,53 +322,7 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
 //     $("#panel").slideUp("fast");
 //   });
 // });
-//-----------------slide show--------------------------------------------------------------//
-    // $scope.slides = document.getElementsByClassName("mySlides");
-    // $scope.activeIndex = 0;
-    // showSlides(activeIndex);
-    // function showSlides(slideCounter){
-    //     activeIndex += slideCounter;
-    //     if(activeIndex>=slides.length) {
-    //         activeIndex = 0;
-    //     }else if(activeIndex<0){
-    //         activeIndex = slides.length -1;
-    //     }
-    //     for ($scope.i=0;i<slides.length;i++){
-    //         slides[i].style.display = "none";//hide all the slides
-    //     }
-    //     slides[activeIndex].style.display = "block";//only show the active slide
-    // }
 
-    //     var app = angular.module('myApp',['ngTouch']);
-    // app.directive('ngCarousel', function() {
-    //   return function(scope, element, attrs) {
-    //     var el = element[0];
-    //     var containerEl = el.querySelector("ul");
-    //     var slidesEl = containerEl.querySelectorAll("li");
-    //     scope.numSlides = slidesEl.length;
-    //     scope.curSlide = 1;   
-    //     scope.$watch('curSlide', function(num) {
-    //       num = (num % scope.numSlides) + 1;
-    //       containerEl.style.left = (-1*100*(num-1)) + '%';
-    //     });
-        
-    //     el.style.position = 'relative';
-    //     el.style.overflow = 'hidden';
-
-    //     containerEl.style.position = 'absolute';
-    //     containerEl.style.width = (scope.numSlides*100)+'%';
-    //     containerEl.style.listStyleType = 'none';
-    //     containerEl.style.margin =0;
-    //     containerEl.style.padding=0;
-    //     containerEl.style.transition = '1s';
-        
-    //     for(var i=0; i<slidesEl.length; i++) {
-    //       var slideEl = slidesEl[i];
-    //       slideEl.style.display = 'inline-block';
-    //       slideEl.style.width = (100/scope.numSlides) + '%';
-    //     }
-    //   };
-    // });
     
 </script>
 </html>

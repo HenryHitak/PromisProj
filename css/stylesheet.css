@@ -67,6 +67,7 @@ footer {
 }
 .btns {
   width: 100%;
+  height: 100%;
   align-content: center;
   
 }
@@ -75,11 +76,12 @@ footer {
   justify-content: center;
   align-items: center;
   padding: 0;
-  width: 13%;
+  height: auto;
+  width: 17%;
 }
 .cart img{
-  width: 3vh;
-  height: 3vh;
+  width: 5vh;
+  height: 5vh;
 }
 
 .login-btn {
@@ -93,14 +95,17 @@ footer {
   color: white;
 }
 .bns{
-  width: 30%;
+  width: 17%;
   height: 100%;
   display: flex;
-  justify-content: space-evenly;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
 }
 .ckout{
   width: 10vh;
   height: 5vh;
+  font-size: small;
 }
 
 
@@ -169,7 +174,7 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   position:fixed;
   z-index: 20000;
   left: 0;
-  top: 85%;
+  top: 75%;
   overflow: auto; /* Enable scroll if needed */
 }
 #cookieNotice{
@@ -498,7 +503,7 @@ input:checked + .slider:before {
 }
 .buybut{
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   width: 50%;
   height: 100%;
   align-items: center;

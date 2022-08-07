@@ -176,16 +176,18 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   position:fixed;
   z-index: 20000;
   left: 0;
-  top: 80%;
+  top: 83%;
   overflow: auto; /* Enable scroll if needed */
 }
 #cookieNotice{
   display: flex;
+  align-items: center;
+  justify-content: center;
   width: 100%;
   height: 100%;
   padding: 1%;
   background-color: black;
-  opacity: 80%;
+  opacity: 90%;
 }
 
 .cookiepolicy button{
@@ -374,7 +376,7 @@ span.psw {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 /* Modal Content/Box */
@@ -401,11 +403,44 @@ span.psw {
   color: red;
   cursor: pointer;
 }
-
+.closeBtn{
+  display: flex;
+  width: 100%;
+  top: 20%;
+  padding-left: 98%;
+  color: white;
+  font-size: larger;
+}
+.closeBtn:hover{
+  color: #64ffda;
+}
+.ad2{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  width: 10%;
+  height: min-content;
+  margin-right: 10px;
+}
+.ad2 button{
+  background-color:goldenrod;
+}
+.ad2 button:hover{
+  background-color:slateblue;
+}
 /* Add Zoom Animation */
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
+}
+.empty{
+  width: 100%;
+  background-color: #1aa786;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  height: 10vh;
 }
 
 @-webkit-keyframes animatezoom {
@@ -534,6 +569,46 @@ input:checked + .slider:before {
   display: flex;
   text-align: center;
   justify-content: center;
+}
+#buyModal{
+  display: flex;
+  width: 80%;
+  height: min-content;
+  margin-left: 10%;
+}
+#cartModal{
+  width: 100%;
+  padding: 10%;
+}
+#cartModal .ad2{
+  width: 20%;
+}
+#cartModal img{
+  width: 40%;
+
+}
+.cartModal{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 40%;
+  background-color: #1aa786;
+  left: 0;
+  border: 2px solid #64ffda;
+}
+
+.buyModal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width:100%;
+  height: auto;
+  background-color: #1aa786;
+  left: 0;
+  border: 2px solid #64ffda;
 }
 
 .about-title {

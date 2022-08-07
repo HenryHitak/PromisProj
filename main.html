@@ -24,7 +24,7 @@
             <form class="modal-content animate" action="blank" method="post" name="registerForm">
                 <div name="registerForm" class="container1" >
                     <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="regVal.usernameInput" required>
+                    <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="usernameInput" required>
                     <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
                     <label for="psw"><b>Password</b></label>
                     <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
@@ -85,7 +85,7 @@
     <main ng-view>
        <!-- show contents from home, games, about -->
     </main>
-    <section class="cookiepolicy">
+    <!-- <section class="cookiepolicy" position:fixed; top:auto; bottom:0;>
         <div id="cookieNotice" class="light display-right">
             <div id="closeIcon">
             </div>
@@ -99,7 +99,7 @@
                     </div>
                 </div>
             </div>
-        </div>
+        </div> -->
     </section>
     <footer>
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
@@ -225,23 +225,22 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     // --------------------------------------------------------cart button----------------------------//
     $rootScope.cartList = [];
     $scope.addCart = ()=>{
-        if($scope.loginDone == false){
-            alert("Please Login First!!!")
-            console.log($scope.loginEnter());
-        }else if($scope.loginDone == true){
-        let buyItemName = event.target.value
-            for(let object of $rootScope.textData){
-                if(object.game_name == buyItemName){
-                    $rootScope.cartList.push(object)
+            console.log($scope.usernameInput)
+            if($scope.usernameInput == undefined){
+                alert("Please Login First!!!")
+            }
+            else{
+                let buyItemName = event.target.value
+                for(let object of $rootScope.textData){
+                    if(object.game_name == buyItemName){
+                        $rootScope.cartList.push(object)
+                    }
                 }
             }
         }
-    }
     $scope.total = function() {
-        var total = 0;
-        angular.forEach($scope.itemList, function(item) {
-            total += item.currency_dollar;
-        })
+        var total = 0;          
+        total += item.currency_dollar;
         return total;
     }
     $scope.chkEmp = ()=>{

@@ -151,7 +151,9 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
 
 .carousel-item {
   width: 100%;
-  height: 90vh;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .carousel-caption {
@@ -169,12 +171,12 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   color: white;
   font-size: medium;
   display: flex;
-  justify-content: end;
-  align-items: end;
+  justify-content: center;
+  align-items: center;
   position:fixed;
   z-index: 20000;
   left: 0;
-  top: 75%;
+  top: 80%;
   overflow: auto; /* Enable scroll if needed */
 }
 #cookieNotice{
@@ -188,14 +190,19 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
 
 .cookiepolicy button{
   background-color: blanchedalmond;
-  width: auto;
-  height: auto;
-  border-color: #64ffda;
+  width: min-content;
+  height: 5vh;
+  color: black;
+  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .cookiepolicy button:hover{
   background-color: black;
   color: white;
 }
+
 /* The dots/bullets/indicators */
 .dot {
   cursor: pointer;
@@ -325,6 +332,12 @@ button:hover {
   width: auto;
   padding: 10px 18px;
   background-color: #f44336;
+}
+.container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
 }
 
 .container1 {
@@ -485,7 +498,14 @@ input:checked + .slider:before {
   flex-wrap: wrap;
   color: white;
 }
-
+.btn-wrap{
+  padding-left: 30%;
+  padding-right: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .games{
   width: 50%;
   height: 100%;

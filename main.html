@@ -11,7 +11,6 @@
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.js"></script>
-            <script src="./jquery-3.6.0.js"></script>
             <link rel="stylesheet" href="./css/stylesheet.css">
     </head>
     <body ng-app="regApp" ng-controller="regCtrl">
@@ -43,7 +42,6 @@
         <div class="bns">
             <a href="#" class="logout" ng-show="loginDone" ng-click="logOut()">Log out</a>
             <button ng-show="loginDone"class="cart" onclick="document.getElementById('cartModal').style.display='block'" ng-click="chkEmp()"><img src="./img/cart.png" ></button>
-            <button ng-show="loginDone" class="ckout">Check Out</button>
         </div>
         <div>
             <a id="dkmd"></a>
@@ -60,16 +58,7 @@
             <span class="slider round"></span>
         </label>
     </div> -->
-    <div class="cartModal"ng-click="showcart()">{{totalqty}}</div>
-        <div ng-repeat="buy in cartList">
-            <p>Game Name: {{buy.game_name}}</p>
-            <p>App Language: {{buy.app_language}}</p>
-            <p>App Version: {{buy.app_ver}}</p>
-            <p>App Year: {{buy.app_year}}</p>
-            <p>Game Company: {{buy.game_company}}</p>
-            <p>Price: {{buy.currency_dollar}}</p>
-        </div>
-    </div>
+
 </header>
         <aside>
             <img src="./img//banner.jpg" class="banner" alt="Banner Image" width="100%" height="500" />
@@ -96,24 +85,22 @@
     <main ng-view>
        <!-- show contents from home, games, about -->
     </main>
-            <section class="cookiepolicy">
-            <div id="cookieNotice" class="light display-right" style="display: none;">
-                <div id="closeIcon" style="display: none;">
-                </div>
-                <div class="title-wrap">
+    <section class="cookiepolicy">
+        <div id="cookieNotice" class="light display-right">
+            <div id="closeIcon">
+            </div>
+            <div class="content-wrap">
+                <div class="msg-wrap">
                     <h4>Cookie Consent</h4>
-                </div>
-                <div class="content-wrap">
-                    <div class="msg-wrap">
-                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
-                        <div class="btn-wrap">
-                            <button class="btn-primary" ng-click="acceptCookieConsent()">Accept</button>
-                            <button class="btn-secondary" ng-click="declineCookieConsent()">Decline</button>
-                        </div>
+                    <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
+                    <div class="btn-wrap">
+                        <button class="btn-primary" onclick="document.getElementById('cookieNotice').style.display='none'" ng-click="acceptCookieConsent()" >Accept</button>
+                        <button class="btn-secondary cancelbtn" onclick="document.getElementById('cookieNotice').style.display='none'">Decline</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
     <footer>
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
     </footer>
@@ -170,7 +157,7 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         }
     // --------------------------Cookie consent popup-------------------------------//
     // Create cookie
-$scope.setCookie = (cname, cvalue, exdays)=> {
+    $scope.setCookie = (cname, cvalue, exdays)=> {
         $scope.d = new Date();
         $scope.d.setTime($scope.d.getTime() + (exdays*24*60*60*1000));
         $scope.expires = "expires="+ $scope.d.toUTCString();
@@ -190,7 +177,7 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
         $scope.name = cname + "=";
         $scope.decodedCookie = decodeURIComponent(document.cookie);
         $scope.ca = decodedCookie.split(';');
-        for(let i = 0; $scope.i <$scope.ca.length; i++) {
+        for(let i = 0; i <$scope.ca.length; i++) {
             $scope.c = $scope.ca[i];
             while ($scope.c.charAt(0) == ' ') {
                 $scope.c = $scope.c.substring(1);
@@ -205,23 +192,19 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
     $scope.acceptCookieConsent=()=>{
         $scope.deleteCookie('user_cookie_consent');
         $scope.setCookie('user_cookie_consent', 1, 30);
-        // document.getElementById("cookieNotice").style.display = "none";
+        $scope.document.getElementById("cookieNotice").style.display = "none";
         $scope.policy = false;
+        $scope.cookie_consent = getCookie("user_cookie_consent");
+        if( $scope.cookie_consent != ""){
+            $scope.document.getElementById("cookieNotice").style.display = "none";
+        }else{
+            $scope.document.getElementById("cookieNotice").style.display = "block";
+        }
     }
-    // $scope.cookie_consent = getCookie("user_cookie_consent");
-    // if(cookie_consent != ""){
-    //     // document.getElementById("cookieNotice").style.display = "none";
-    // }else{
-    //     // document.getElementById("cookieNotice").style.display = "block";
-    // }
-    // $scope.declineCookieConsent=()=>{
-    //     // document.getElementById("cookieNotice").style.display = "none";
-    // }
     //------------------light dark mode -------------------------------------------------------//
     $scope.myFunction=()=> {
         $scope.element = document.body;
         console.log(document.body);
-        // $scope.el = document.getElementsByTagName('div');
         $scope.element.classList.toggle("dark-mode");
     }
     // --------------------------------------------------------add to cart----------------------------//
@@ -237,16 +220,26 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
             console.log($scope.itemList)
         }
     // --------------------------------------------------------cart button----------------------------//
-        $rootScope.cartList = [];
+    $rootScope.cartList = [];
     $scope.addCart = ()=>{
+        if($scope.loginDone === false){
+            alert("Please Login First!!!")
+        }else{
         let buyItemName = event.target.value
-        for(let object of $rootScope.textData){
-            if(object.game_name == buyItemName){
-                $rootScope.cartList.push(object)
+            for(let object of $rootScope.textData){
+                if(object.game_name == buyItemName){
+                    $rootScope.cartList.push(object)
+                }
             }
         }
     }
-
+    $scope.total = function() {
+        var total = 0;
+        angular.forEach($scope.itemList, function(item) {
+            total += item.currency_dollar;
+        })
+        return total;
+    }
     $scope.chkEmp = ()=>{
         if($rootScope.cartList.length == 0){
             $scope.showWarn = true;
@@ -258,92 +251,21 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
         }
            console.log($scope.cartList)
     }
+    // --------------------------------------------------------hide cart button----------------------------//
+    $scope.cartshow = false;
+    $scope.show = false;    
+    $scope.showcart = function(){
+        $scope.cartshow = true;
+    }    
+    $scope.hidecart = function(){
+        $scope.cartshow = false;
+    }  
+    $scope.hidemodal = function(){
+        $scope.show = false;
+    }
 })
 
 
-//-----------------------------------------------details--------------------------------------------------//
-
-// app.controller('regCtrl', function($scope, $http) {
-// $scope.submit = function() {
-//  // alert("SUBMIT "+$scope.regVal.username);
-//   var stat="false";
-// angular.forEach($scope.mydata, function(item){
-//                   // alert(item.email);  
-//                   if((item.email==$scope.regVal.usernameInput)&&(item.Password==$scope.regVal.psw))
-//                   {
-//                     stat="true";
-//                   }
-
-
-//                });
-// $scope.regVal.usernameInput="";
-// $scope.regVal.psw="";
-//   if(stat=="true")
-//     alert("Success");
-//   else
-//     alert("Failure");
-//   };
-  
-//  $scope.regVal = {
-// 			"username" : "",
-// 			"password" : ""
-			
-// 		};
-// $scope.mydata;
-//   $http.get("/users.json")
-//   .then(function(response) {
-//       $scope.mydata = response.data;
-//        angular.forEach($scope.mydata, function(item){
-//                   // alert(item.email);  
-//                })
-      
-//   });
-  
-  
-// });
-//---------------------------calling the json file----------------------------------//
-    //     $scope.populate = (data)=>{
-    //     $scope.tbody = document.getElementsByTagName("tbody")[0];
-    //     $scope.datas = JSON.parse(data)
-    //     for ($scope.obj of datas){
-    //         $scope.tr = document.createElement('tr');
-    //         for ($scope.prop in obj){
-    //             $scope.td = document.createElement("td");
-    //             td.innerText = obj[prop];
-    //             tr.appendChild(td);
-    //         }
-    //         tbody.appendChild(tr);
-    //     }
-    // }
-    // async function loadJson(){
-    // $scope.ajaxPromise = new Promise ((resolve,reject)=>{
-    //     $scope.req = new XMLHttpRequest();
-    //     req.open("GET","./data.json");
-    //     req.onload = () =>{
-    //         if(req.status==200){
-    //             resolve(req.responseText);
-    //         }else{
-    //             reject(req.statusText0);
-    //         }
-    //     };
-    //     req.send();
-    // })
-    // populate(await ajaxPromise);
-    // }
-    // loadJson().then(
-    //     ()=>{},
-    //     (reason)=>{alert(reason);}
-    // )
-
-//-----------------Game Gallery accordion logic-------------------------------------------//
-// $(document).ready(function(){
-//   $("#flip").click(function(){
-//     $("#panel").slideDown("slow");
-//   });
-//     $("#flip").blur(function(){
-//     $("#panel").slideUp("fast");
-//   });
-// });
 
     
 </script>

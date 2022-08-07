@@ -62,7 +62,7 @@
     <section class="gameTable">
         <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
             <div class="gm">
-                <img src="{{data.img}}" style="width:500px"></img>
+                <img src="{{data.img}}" style="width:500px">
                 <br><span>Game: {{data.game_name}}</span>
                 <br><span>Company: {{data.game_company}}</span>
                 <br><span>Price: {{data.currency_dollar}}</span>
@@ -83,26 +83,10 @@
             <p>App Year: {{buy.app_year}}</p>
             <p>Game Company: {{buy.game_company}}</p>
             <p>Price: {{buy.currency_dollar}}</p>
-            <button type="button" ng-click="addCart()" value="{{buy.game_name}}" onclick="document.getElementById('buyModal').style.display='none'">Buy</button>
+            <button type="button" ng-click="addCart()" value="{{buy.game_name}}" onclick="document.getElementById('buyModal').style.display='none'">Add to Cart!</button>
         </div>
     </div>
-    <div class="modal" id="buyModal">
-        <span class="closeBtn" type="button"
-            onclick="document.getElementById('buyModal').style.display='none'">&#x2715</span>
-        <div class="buyModal" ng-repeat="buy in itemList">
-            <img ng-src="{{buy.img}}">
-            <p>Game Name: {{buy.game_name}}</p>
-            <p>App Language: {{buy.app_language}}</p>
-            <p>App Version: {{buy.app_ver}}</p>
-            <p>App Year: {{buy.app_year}}</p>
-            <p>Game Company: {{buy.game_company}}</p>
-            <p>Price: {{buy.currency_dollar}}</p>
-            <!-- add value -->
-            <button type="button" ng-click="addCart()"
-                onclick="document.getElementById('buyModal').style.display='none'"
-                value="{{buy.game_name}}">Buy</button>
-        </div>
-    </div>
+
     <div class="modal" id="cartModal">
         <span class="closeBtn" type="button"
             onclick="document.getElementById('cartModal').style.display='none'">&#x2715</span>
@@ -116,6 +100,7 @@
                     <th>Total</th>
                 </tr>
                 <tr ng-repeat = "buy in cartList">
+                    <img src="{{buy.img}}">
                     <td>{{buy.game_name}}</td>
                     <td>{{buy.app_language}}</td>
                     <td>{{buy.app_ver}}</td>
@@ -125,10 +110,11 @@
                     <td>Total:</td>
                     <td></td>
                     <td></td>
-                    <td>XXXX</td>
+                    <td>{{total() | currency}}</td>
                 </tr>
             </table>
-            <button type="button">Pay</button>
+        <button type="button" id="conbtn" ng-click="hidecart()">CONTINUE SHOPPING</button>
+        <button type="button" id="finbtn" ng-click="hidecart()">FINISH SHOPPING</button>
         </div>
     </div>
     </section>
@@ -219,5 +205,14 @@
         from {opacity: .4}
         to {opacity: 1}
     }
+
+    .carousel-item img{
+        width: 100vh;
+        height: 60vh;
+    }
+    .carousel-item{
+        border: 4px solid #64ffda;
+    }
+
 </style>
 

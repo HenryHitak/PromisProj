@@ -33,7 +33,7 @@
                     </label>
                     <div class="container1">
                         <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
-                    <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
+                        <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
                     <span class="psw"><a href="#!metoo">Forgot password?</a></span>
                     </div>
                 </div>
@@ -149,12 +149,15 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         $scope.modal=true;
     }
     $scope.loginDone = false;
-        $scope.loginEnter = ()=>{
-            $scope.loginDone = true;
-        }
-        $scope.logOut = ()=>{
-            $scope.loginDone = false;
-        }
+    console.log($scope.loginDone)
+    $scope.loginEnter = ()=>{
+        $scope.loginDone = true;
+        console.log($scope.loginDone)
+    }
+    $scope.logOut = ()=>{
+        $scope.loginDone = false;
+        console.log($scope.loginDone)
+    }
     // --------------------------Cookie consent popup-------------------------------//
     // Create cookie
     $scope.setCookie = (cname, cvalue, exdays)=> {
@@ -222,9 +225,10 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     // --------------------------------------------------------cart button----------------------------//
     $rootScope.cartList = [];
     $scope.addCart = ()=>{
-        if($scope.loginDone === false){
+        if($scope.loginDone == false){
             alert("Please Login First!!!")
-        }else{
+            console.log($scope.loginEnter());
+        }else if($scope.loginDone == true){
         let buyItemName = event.target.value
             for(let object of $rootScope.textData){
                 if(object.game_name == buyItemName){

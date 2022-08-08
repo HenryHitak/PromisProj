@@ -138,12 +138,9 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     (res)=>{
         $rootScope.textData = res.data;
         // console.log(res.data)
-    }
-    )
+    })
     // switch(event.type){
-
     // }
-
     //---------------------------login and out-------------------------------------//
     // Get the modal    
     // When the user clicks anywhere outside of the modal, close it
@@ -160,52 +157,16 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         $scope.loginDone = false;
         console.log($scope.loginDone)
     }
+    // Function for compare and check if input value is matched with json file
+
     // --------------------------Cookie consent popup-------------------------------//
     // Create cookie
-    $scope.setCookie = (cname, cvalue, exdays)=> {
-        $scope.d = new Date();
-        $scope.d.setTime($scope.d.getTime() + (exdays*24*60*60*1000));
-        $scope.expires = "expires="+ $scope.d.toUTCString();
-        $scope.document.cookie = cname + "=" + cvalue + ";" + $scope.expires + ";path=/";
+    if(localStorage.getItem("gamesCart")){
+        $rootScope.cartList = JSON.parse(localStorage.getItem("gamesCart"));
+    } else {
+        $rootScope.cartList = [];
     }
     
-    // Delete cookie
-    $scope.deleteCookie=(cname) =>{
-        $scope.d = new Date();
-        $scope.d.setTime($scope.d.getTime() + (24*60*60*1000));
-        $scope.expires = "expires="+ $scope.d.toUTCString();
-        $scope.document.cookie = cname + "=;" + $scope.expires + ";path=/";
-    }
-    
-    // Read cookie
-    $scope.getCookie=(cname) =>{
-        $scope.name = cname + "=";
-        $scope.decodedCookie = decodeURIComponent(document.cookie);
-        $scope.ca = decodedCookie.split(';');
-        for(let i = 0; i <$scope.ca.length; i++) {
-            $scope.c = $scope.ca[i];
-            while ($scope.c.charAt(0) == ' ') {
-                $scope.c = $scope.c.substring(1);
-            }
-            if ($scope.c.indexOf(name) == 0) {
-                return $scope.c.substring(name.length, $scope.c.length);
-            }
-        }
-        return "";
-    }
-    // Set cookie consent
-    $scope.acceptCookieConsent=()=>{
-        $scope.deleteCookie('user_cookie_consent');
-        $scope.setCookie('user_cookie_consent', 1, 30);
-        $scope.document.getElementById("cookieNotice").style.display = "none";
-        $scope.policy = false;
-        $scope.cookie_consent = getCookie("user_cookie_consent");
-        if( $scope.cookie_consent != ""){
-            $scope.document.getElementById("cookieNotice").style.display = "none";
-        }else{
-            $scope.document.getElementById("cookieNotice").style.display = "block";
-        }
-    }
     //------------------light dark mode -------------------------------------------------------//
     $scope.myFunction=()=> {
         $scope.element = document.body;
@@ -224,28 +185,29 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
             }
             console.log($scope.itemList)
         }
-        // --------------------------------------------------------cart button----------------------------//
-        $rootScope.cartList = [];
+    // --------------------------------------------------------cart button----------------------------//
+    $rootScope.cartList = [];
     $scope.addCart = ()=>{
-        console.log($scope.usernameInput)
-        if($scope.usernameInput == undefined){
-            alert("Please Login First!!!")
-        }
-        else{
-            let buyItemName = event.target.value
-            for(let object of $rootScope.textData){
-                if(object.game_name == buyItemName){
-                    $rootScope.cartList.push(object)
-                }
+    console.log($scope.usernameInput)
+    if($scope.usernameInput == undefined){
+        alert("Please Login First!!!")
+    }
+    else{
+        let buyItemName = event.target.value
+        for(let object of $rootScope.textData){
+            if(object.game_name == buyItemName){
+                $rootScope.cartList.push(object)
+                localStorage.setItem("gamesCart", JSON.stringify($rootScope.cartList)) //add to localstorage session
             }
         }
+    }
     }
     $scope.calTotal = ()=>{
         let total = 0;
         for(let data of $rootScope.cartList){
             total += data.currency_dollar
         }
-        return parseFloat(total);
+        return total.toFixed(2);
     }
     // ----------------------------------------------------delete button------------------------//
     $scope.deleteRow= function (i) {
@@ -287,6 +249,33 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
 
     }
 })
+// --------------------------------------------Trying login verification with Json-------------------------//
+// regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
+//     $http.get("./users.json").then(
+//     (res)=>{
+//         $rootScope.textData = res.data;
+//         let emailInput = document.getElementsByTagName("input")[0];
+//         let passwordInput = document.getElementsByTagName("input")[1];
+//         $rootScope.emailCookieChecker();
+//         $rootScope.signInChecker = (data, account, password) => {
+//             for (let obj of data) {
+//                 if (obj.account == account && obj.password == password) {
+//                     console.log("Login success!");
+//                     return obj;
+//                     }
+//                     }
+//                     return false;
+//                     };
+//         $rootScope.emailCookieChecker = () => {
+//             let email = $rootScope.getCookie("email");
+//             if (email != "") {
+//                 $rootScope.email = email;
+//                 checkBox.checked = true;
+//             }
+//         };
+//     }
+//     )
+// });
 
 
 

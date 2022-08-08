@@ -62,14 +62,18 @@
     <section class="gameTable">
         <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
             <div class="gm">
-                <img src="{{data.img}}" style="width:500px">
-                <br><span>Game: {{data.game_name}}</span>
-                <br><span>Company: {{data.game_company}}</span>
-                <br><span>Price: {{data.cur}}{{data.currency_dollar}}</span>
-            </div>
-            <div class="buybut">
-                <button type="button" onclick="document.getElementById('buyModal').style.display='block'"
-                    ng-click="showItem()" value="{{data.game_name}}">Add to Cart</button>
+                <img ng-src="{{data.img}}" style="width:700px">
+                </div>
+            <div class="gms">
+                <div class="gm">
+                    <br><span>Game: {{data.game_name}}</span>
+                    <br><span>Company: {{data.game_company}}</span>
+                    <br><span>Price: {{data.cur}}{{data.currency_dollar}}</span>
+                </div>
+                <div class="buybut">
+                    <button type="button" onclick="document.getElementById('buyModal').style.display='block'"
+                        ng-click="showItem()" value="{{data.game_name}}">Add to Cart</button>
+                </div>
             </div>
         </div>
 <!-- add to cart -->
@@ -127,7 +131,7 @@
             </table>
             <div class="ad2">
                 <button type="button" id="conbtn" onclick="document.getElementById('cartModal').style.display='none'">CONTINUE</button>
-                <button type="button" id="finbtn" ng-click="acceptCookieConsent()">FINISH SHOPPING</button>
+                <button type="button" id="finbtn" onclick="document.getElementById('cartModal').style.display='none'">FINISH SHOPPING</button>
             </div>
         </div>
         </div>

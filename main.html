@@ -18,30 +18,32 @@
         <!-- <h5>Dark Mode</h5> -->
         <div class="btns">
             <div class="loginmodal">
-        <button onclick="document.getElementById('log').style.display='block'" class="login-btn" ng-hide="loginDone">Login</button>
-        <!-- Login modal -->
-        <div id="log" class="modal">
-            <form class="modal-content animate" action="blank" method="post" name="registerForm">
-                <div name="registerForm" class="container1" >
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="usernameInput" required>
-                    <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                    <div class="container1">
-                        <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
-                        <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
-                    <span class="psw"><a href="#!metoo">Forgot password?</a></span>
+            <button onclick="document.getElementById('log').style.display='block'" class="login-btn" ng-hide="loginDone">Login</button>
+            <!-- Login modal -->
+            <div id="log" class="modal">
+                <form class="modal-content animate" action="blank" method="post" name="registerForm">
+                    <div name="registerForm" class="container1" >
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="usernameInput" required>
+                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                        <div class="container1">
+                            <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
+                            <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw"><a href="#!metoo">Forgot password?</a></span>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            </div>
         </div>
         <div class="bns">
             <a href="#" class="logout" ng-show="loginDone" ng-click="logOut()">Log out</a>
-            <button ng-show="loginDone"class="cart" onclick="document.getElementById('cartModal').style.display='block'" ng-click="chkEmp()"><img src="./img/cart.png" ></button>
+            <a ng-show="loginDone"class="cart" id="cartt" onclick="document.getElementById('cartModal').style.display='block'" ng-click="chkEmp()"><img src="./img/cart.png" ></a>
         </div>
         <div>
             <a id="dkmd"></a>
@@ -222,27 +224,29 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
             }
             console.log($scope.itemList)
         }
-    // --------------------------------------------------------cart button----------------------------//
-    $rootScope.cartList = [];
+        // --------------------------------------------------------cart button----------------------------//
+        $rootScope.cartList = [];
     $scope.addCart = ()=>{
-            console.log($scope.usernameInput)
-            if($scope.usernameInput == undefined){
-                alert("Please Login First!!!")
-            }
-            else{
-                let buyItemName = event.target.value
-                for(let object of $rootScope.textData){
-                    if(object.game_name == buyItemName){
-                        $rootScope.cartList.push(object)
-                    }
+        console.log($scope.usernameInput)
+        if($scope.usernameInput == undefined){
+            alert("Please Login First!!!")
+        }
+        else{
+            let buyItemName = event.target.value
+            for(let object of $rootScope.textData){
+                if(object.game_name == buyItemName){
+                    $rootScope.cartList.push(object)
                 }
             }
         }
-    $scope.total = function() {
-        var total = 0;          
-        total += item.currency_dollar;
-        return total;
     }
+    // ----------------------------------------------------delete button------------------------//
+    $scope.deleteRow= function (i) {
+        $scope.total = document.getElementById(total);
+        $scope.cartList.splice(i, 1);
+        return $scope.total;
+    };
+    
     $scope.chkEmp = ()=>{
         if($rootScope.cartList.length == 0){
             $scope.showWarn = true;
@@ -261,10 +265,19 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         $scope.cartshow = true;
     }    
     $scope.hidecart = function(){
-        $scope.cartshow = false;
+        $scope.cartshow = true;
+        $scope.deleteCookie('user_cookie_consent');
+        $scope.setCookie('user_cookie_consent', 1, 30);
+        $scope.document.getElementById("cookieNotice").style.display = "none";
+        if( $scope.cookie_consent != ""){
+            $scope.document.getElementById("cookieNotice").style.display = "none";
+        }else{
+            $scope.document.getElementById("cookieNotice").style.display = "block";
+        }
     }  
     $scope.hidemodal = function(){
         $scope.show = false;
+
     }
 })
 

@@ -57,7 +57,7 @@
         </button>
     </div>
 </section>
-
+<!-- Game Table -->
     <input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
     <section class="gameTable">
         <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
@@ -65,16 +65,17 @@
                 <img src="{{data.img}}" style="width:500px">
                 <br><span>Game: {{data.game_name}}</span>
                 <br><span>Company: {{data.game_company}}</span>
-                <br><span>Price: {{data.currency_dollar}}</span>
+                <br><span>Price: {{data.cur}}{{data.currency_dollar}}</span>
             </div>
             <div class="buybut">
                 <button type="button" onclick="document.getElementById('buyModal').style.display='block'"
                     ng-click="showItem()" value="{{data.game_name}}">Add to Cart</button>
             </div>
         </div>
+<!-- add to cart -->
         <div class="modal" id="buyModal">
-        <span class="closeBtn" type="button" onclick="document.getElementById('buyModal').style.display='none'">&#x2715</span>
-        <div class="buyModal" ng-repeat="buy in itemList">
+        <!-- <span class="closeBtn" type="button" onclick="document.getElementById('buyModal').style.display='none'" >&#x2715</span> -->
+        <div class="buyModal" ng-repeat="buy in itemList" >
             <img ng-src="{{buy.img}}">
             <div>
                 <p>Game Name: {{buy.game_name}}</p>
@@ -82,16 +83,17 @@
                 <p>App Version: {{buy.app_ver}}</p>
                 <p>App Year: {{buy.app_year}}</p>
                 <p>Game Company: {{buy.game_company}}</p>
-                <p>Price: {{buy.currency_dollar}}</p>
+                <p>Price: {{buy.cur}}{{buy.currency_dollar}}</p>
             </div>
             <div class="ad2">
+                <button type="button" id="conbtn" onclick="document.getElementById('buyModal').style.display='none'">CONTINUE</button>
                 <button type="button" ng-click="addCart()" value="{{buy.game_name}}" onclick="document.getElementById('buyModal').style.display='none'" >Add to Cart!</button>
             </div>
         </div>
-    </div>
-
-    <div class="modal" id="cartModal">
-        <span class="closeBtn" type="button" onclick="document.getElementById('cartModal').style.display='none'">&#x2715</span>
+        </div>
+<!-- Cart checkout -->
+        <div class="modal" id="cartModal">
+        <span class="closeBtn" type="button" onclick="document.getElementById('cartModal').style.display='none'" >&#x2715</span>
         <div ng-show="showWarn" class="empty"> Your Cart is Empty</div>
         <div class="buyModal" ng-repeat="buy in itemList" ng-show="showCart">
             <table>
@@ -103,13 +105,14 @@
                         <th>Total</th>
                     </tr>
                 </thead>
-                <tbody ng-repeat = "buy in cartList">
+                <tbody ng-repeat = "buy in cartList" ng-init="$parent.total=total+buy.currency_dollar">
                     <img ng-src="{{buy.img}}"/>
                     <tr>
                         <td>{{buy.game_name}}</td>
                         <td>{{buy.app_language}}</td>
                         <td>{{buy.app_ver}}</td>
-                        <td>{{buy.currency_dollar}}</td>
+                        <td>{{buy.cur}}{{buy.currency_dollar}}</td>
+                        <td><span class="closeBtn" type="button" ng-click="deleteRow($index)">&#x2715</span></td>
                     </tr>
                 </tbody>
                 <tfoot>
@@ -117,17 +120,17 @@
                         <td>Total:</td>
                         <td></td>
                         <td></td>
-                        <td>{{total() | currency}}</td>
+                        <td id="total">{{buy.cur}}{{total | number: 2}}</td>
                     </tr>
                 </tfoot>
             </table>
             <div class="ad2">
-                <button type="button" id="conbtn" ng-click="hidecart()">CONTINUE SHOPPING</button>
-                <button type="button" id="finbtn" ng-click="hidecart()">FINISH SHOPPING</button>
+                <button type="button" id="conbtn" onclick="document.getElementById('cartModal').style.display='none'">CONTINUE</button>
+                <button type="button" id="finbtn" ng-click="acceptCookieConsent()">FINISH SHOPPING</button>
             </div>
         </div>
+        </div>
     </div>
-    </section>
 </section>
 <style>
     /* Slideshow container */
@@ -224,7 +227,6 @@
         border: 4px solid #64ffda;
     }
 #buymodal{
-    padding-top: 0;
     display: flex;
     width: 100%;
 }

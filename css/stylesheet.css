@@ -39,7 +39,6 @@ button {
   color: white;
   background-color:midnightblue;
   padding: 2%;
-  border-radius: 10%;
   border: none;
 }
 
@@ -95,12 +94,18 @@ footer {
   color: white;
 }
 .bns{
-  width: 17%;
+  width: 25%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
+}
+.bns>#cartt{
+  background-color: none;
+}
+#cartt:hover{
+  background-color:#a859c1;
 }
 .ckout{
   width: 10vh;
@@ -163,46 +168,6 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   left: 0;
   z-index: 100;
   background: rgba(0,0,0,0.4);
-}
-.cookiepolicy{
-  width: 100%;
-  /* padding: 1%; */
-  /* background-color: black; */
-  color: white;
-  font-size: medium;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position:fixed;
-  z-index: 20000;
-  left: 0;
-  top: 83%;
-  overflow: auto; /* Enable scroll if needed */
-}
-#cookieNotice{
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  height: 100%;
-  padding: 1%;
-  background-color: black;
-  opacity: 90%;
-}
-
-.cookiepolicy button{
-  background-color: blanchedalmond;
-  width: min-content;
-  height: 5vh;
-  color: black;
-  text-align: center;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-}
-.cookiepolicy button:hover{
-  background-color: black;
-  color: white;
 }
 
 /* The dots/bullets/indicators */
@@ -406,7 +371,7 @@ span.psw {
 .closeBtn{
   display: flex;
   width: 100%;
-  top: 20%;
+  top: 0;
   padding-left: 98%;
   color: white;
   font-size: larger;
@@ -418,12 +383,14 @@ span.psw {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items:stretch;
   width: 10%;
-  height: min-content;
+  height: 100%;
   margin-right: 10px;
 }
 .ad2 button{
   background-color:goldenrod;
+  border: 1px solid ;
 }
 .ad2 button:hover{
   background-color:slateblue;
@@ -571,10 +538,11 @@ input:checked + .slider:before {
   justify-content: center;
 }
 #buyModal{
-  display: flex;
+  /* display: flex; */
   width: 80%;
   height: min-content;
   margin-left: 10%;
+  margin-top: 10%;
 }
 #cartModal{
   width: 100%;
@@ -609,6 +577,7 @@ input:checked + .slider:before {
   background-color: #1aa786;
   left: 0;
   border: 2px solid #64ffda;
+
 }
 
 .about-title {

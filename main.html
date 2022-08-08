@@ -11,7 +11,6 @@
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
             <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular-route.js"></script>
             <script src="//ajax.googleapis.com/ajax/libs/angularjs/1.6.6/angular-animate.js"></script>
-            <script src="./jquery-3.6.0.js"></script>
             <link rel="stylesheet" href="./css/stylesheet.css">
     </head>
     <body ng-app="regApp" ng-controller="regCtrl">
@@ -19,31 +18,32 @@
         <!-- <h5>Dark Mode</h5> -->
         <div class="btns">
             <div class="loginmodal">
-        <button onclick="document.getElementById('log').style.display='block'" class="login-btn" ng-hide="loginDone">Login</button>
-        <!-- Login modal -->
-        <div id="log" class="modal">
-            <form class="modal-content animate" action="blank" method="post" name="registerForm">
-                <div name="registerForm" class="container1" >
-                    <label for="uname"><b>Username</b></label>
-                    <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="regVal.usernameInput" required>
-                    <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
-                    <label for="psw"><b>Password</b></label>
-                    <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
-                    <label>
-                        <input type="checkbox" checked="checked" name="remember"> Remember me
-                    </label>
-                    <div class="container1">
-                        <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
-                    <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
-                    <span class="psw"><a href="#!metoo">Forgot password?</a></span>
+            <button onclick="document.getElementById('log').style.display='block'" class="login-btn" ng-hide="loginDone">Login</button>
+            <!-- Login modal -->
+            <div id="log" class="modal">
+                <form class="modal-content animate" action="blank" method="post" name="registerForm">
+                    <div name="registerForm" class="container1" >
+                        <label for="uname"><b>Username</b></label>
+                        <input type="text" placeholder="Enter Username" name="usernameInput" ng-model="usernameInput" required>
+                        <p class="error" ng-hide="{{registerForm.usernameInput.$pristine}}" ng-show="registerForm.usernameInput.$invalid" >Username should be filled</p>
+                        <label for="psw"><b>Password</b></label>
+                        <input type="password" placeholder="Enter Password" name="psw" ng-model="regVal.psw" required>    
+                        <label>
+                            <input type="checkbox" checked="checked" name="remember"> Remember me
+                        </label>
+                        <div class="container1">
+                            <button type="button"  onclick="document.getElementById('log').style.display='none'" ng-click="loginEnter()">Login</button>
+                            <button type="button" onclick="document.getElementById('log').style.display='none'" class="cancelbtn">Cancel</button>
+                        <span class="psw"><a href="#!metoo">Forgot password?</a></span>
+                        </div>
                     </div>
-                </div>
-            </form>
+                </form>
+            </div>
+            </div>
         </div>
         <div class="bns">
             <a href="#" class="logout" ng-show="loginDone" ng-click="logOut()">Log out</a>
-            <button ng-show="loginDone"class="cart" onclick="document.getElementById('cartModal').style.display='block'" ng-click="chkEmp()"><img src="./img/cart.png" ></button>
-            <button ng-show="loginDone" class="ckout">Check Out</button>
+            <a ng-show="loginDone"class="cart" id="cartt" onclick="document.getElementById('cartModal').style.display='block'" ng-click="chkEmp()"><img src="./img/cart.png" ></a>
         </div>
         <div>
             <a id="dkmd"></a>
@@ -60,16 +60,7 @@
             <span class="slider round"></span>
         </label>
     </div> -->
-    <div class="cartModal"ng-click="showcart()">{{totalqty}}</div>
-        <div ng-repeat="buy in cartList">
-            <p>Game Name: {{buy.game_name}}</p>
-            <p>App Language: {{buy.app_language}}</p>
-            <p>App Version: {{buy.app_ver}}</p>
-            <p>App Year: {{buy.app_year}}</p>
-            <p>Game Company: {{buy.game_company}}</p>
-            <p>Price: {{buy.currency_dollar}}</p>
-        </div>
-    </div>
+
 </header>
         <aside>
             <img src="./img//banner.jpg" class="banner" alt="Banner Image" width="100%" height="500" />
@@ -96,24 +87,22 @@
     <main ng-view>
        <!-- show contents from home, games, about -->
     </main>
-            <section class="cookiepolicy">
-            <div id="cookieNotice" class="light display-right" style="display: none;">
-                <div id="closeIcon" style="display: none;">
-                </div>
-                <div class="title-wrap">
+    <!-- <section class="cookiepolicy" position:fixed; top:auto; bottom:0;>
+        <div id="cookieNotice" class="light display-right">
+            <div id="closeIcon">
+            </div>
+            <div class="content-wrap">
+                <div class="msg-wrap">
                     <h4>Cookie Consent</h4>
-                </div>
-                <div class="content-wrap">
-                    <div class="msg-wrap">
-                        <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
-                        <div class="btn-wrap">
-                            <button class="btn-primary" ng-click="acceptCookieConsent()">Accept</button>
-                            <button class="btn-secondary" ng-click="declineCookieConsent()">Decline</button>
-                        </div>
+                    <p>This website uses cookies or similar technologies, to enhance your browsing experience and provide personalized recommendations. By continuing to use our website, you agree to our  <a style="color:#115cfa;" href="/privacy-policy">Privacy Policy</a></p>
+                    <div class="btn-wrap">
+                        <button class="btn-primary" onclick="document.getElementById('cookieNotice').style.display='none'" ng-click="acceptCookieConsent()" >Accept</button>
+                        <button class="btn-secondary cancelbtn" onclick="document.getElementById('cookieNotice').style.display='none'">Decline</button>
                     </div>
                 </div>
             </div>
-        </section>
+        </div> -->
+    </section>
     <footer>
         All Rights Reserved &copy; Promise Team (2022) Tamwood College, Vancouver, BC
     </footer>
@@ -149,12 +138,9 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
     (res)=>{
         $rootScope.textData = res.data;
         // console.log(res.data)
-    }
-    )
+    })
     // switch(event.type){
-
     // }
-
     //---------------------------login and out-------------------------------------//
     // Get the modal    
     // When the user clicks anywhere outside of the modal, close it
@@ -162,66 +148,29 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
         $scope.modal=true;
     }
     $scope.loginDone = false;
-        $scope.loginEnter = ()=>{
-            $scope.loginDone = true;
-        }
-        $scope.logOut = ()=>{
-            $scope.loginDone = false;
-        }
+    console.log($scope.loginDone)
+    $scope.loginEnter = ()=>{
+        $scope.loginDone = true;
+        console.log($scope.loginDone)
+    }
+    $scope.logOut = ()=>{
+        $scope.loginDone = false;
+        console.log($scope.loginDone)
+    }
+    // Function for compare and check if input value is matched with json file
+
     // --------------------------Cookie consent popup-------------------------------//
     // Create cookie
-$scope.setCookie = (cname, cvalue, exdays)=> {
-        $scope.d = new Date();
-        $scope.d.setTime($scope.d.getTime() + (exdays*24*60*60*1000));
-        $scope.expires = "expires="+ $scope.d.toUTCString();
-        $scope.document.cookie = cname + "=" + cvalue + ";" + $scope.expires + ";path=/";
+    if(localStorage.getItem("gamesCart")){
+        $rootScope.cartList = JSON.parse(localStorage.getItem("gamesCart"));
+    } else {
+        $rootScope.cartList = [];
     }
     
-    // Delete cookie
-    $scope.deleteCookie=(cname) =>{
-        $scope.d = new Date();
-        $scope.d.setTime($scope.d.getTime() + (24*60*60*1000));
-        $scope.expires = "expires="+ $scope.d.toUTCString();
-        $scope.document.cookie = cname + "=;" + $scope.expires + ";path=/";
-    }
-    
-    // Read cookie
-    $scope.getCookie=(cname) =>{
-        $scope.name = cname + "=";
-        $scope.decodedCookie = decodeURIComponent(document.cookie);
-        $scope.ca = decodedCookie.split(';');
-        for(let i = 0; $scope.i <$scope.ca.length; i++) {
-            $scope.c = $scope.ca[i];
-            while ($scope.c.charAt(0) == ' ') {
-                $scope.c = $scope.c.substring(1);
-            }
-            if ($scope.c.indexOf(name) == 0) {
-                return $scope.c.substring(name.length, $scope.c.length);
-            }
-        }
-        return "";
-    }
-    // Set cookie consent
-    $scope.acceptCookieConsent=()=>{
-        $scope.deleteCookie('user_cookie_consent');
-        $scope.setCookie('user_cookie_consent', 1, 30);
-        // document.getElementById("cookieNotice").style.display = "none";
-        $scope.policy = false;
-    }
-    // $scope.cookie_consent = getCookie("user_cookie_consent");
-    // if(cookie_consent != ""){
-    //     // document.getElementById("cookieNotice").style.display = "none";
-    // }else{
-    //     // document.getElementById("cookieNotice").style.display = "block";
-    // }
-    // $scope.declineCookieConsent=()=>{
-    //     // document.getElementById("cookieNotice").style.display = "none";
-    // }
     //------------------light dark mode -------------------------------------------------------//
     $scope.myFunction=()=> {
         $scope.element = document.body;
         console.log(document.body);
-        // $scope.el = document.getElementsByTagName('div');
         $scope.element.classList.toggle("dark-mode");
     }
     // --------------------------------------------------------add to cart----------------------------//
@@ -237,16 +186,36 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
             console.log($scope.itemList)
         }
     // --------------------------------------------------------cart button----------------------------//
-        $rootScope.cartList = [];
+    $rootScope.cartList = [];
     $scope.addCart = ()=>{
+    console.log($scope.usernameInput)
+    if($scope.usernameInput == undefined){
+        alert("Please Login First!!!")
+    }
+    else{
         let buyItemName = event.target.value
         for(let object of $rootScope.textData){
             if(object.game_name == buyItemName){
                 $rootScope.cartList.push(object)
+                localStorage.setItem("gamesCart", JSON.stringify($rootScope.cartList)) //add to localstorage session
             }
         }
     }
-
+    }
+    $scope.calTotal = ()=>{
+        let total = 0;
+        for(let data of $rootScope.cartList){
+            total += data.currency_dollar
+        }
+        return total.toFixed(2);
+    }
+    // ----------------------------------------------------delete button------------------------//
+    $scope.deleteRow= function (i) {
+        $scope.total = document.getElementById(total);
+        $scope.cartList.splice(i, 1);
+        return $scope.total;
+    };
+    
     $scope.chkEmp = ()=>{
         if($rootScope.cartList.length == 0){
             $scope.showWarn = true;
@@ -258,92 +227,57 @@ $scope.setCookie = (cname, cvalue, exdays)=> {
         }
            console.log($scope.cartList)
     }
+    // --------------------------------------------------------hide cart button----------------------------//
+    $scope.cartshow = false;
+    $scope.show = false;    
+    $scope.showcart = function(){
+        $scope.cartshow = true;
+    }    
+    $scope.hidecart = function(){
+        $scope.cartshow = true;
+        $scope.deleteCookie('user_cookie_consent');
+        $scope.setCookie('user_cookie_consent', 1, 30);
+        $scope.document.getElementById("cookieNotice").style.display = "none";
+        if( $scope.cookie_consent != ""){
+            $scope.document.getElementById("cookieNotice").style.display = "none";
+        }else{
+            $scope.document.getElementById("cookieNotice").style.display = "block";
+        }
+    }  
+    $scope.hidemodal = function(){
+        $scope.show = false;
+
+    }
 })
-
-
-//-----------------------------------------------details--------------------------------------------------//
-
-// app.controller('regCtrl', function($scope, $http) {
-// $scope.submit = function() {
-//  // alert("SUBMIT "+$scope.regVal.username);
-//   var stat="false";
-// angular.forEach($scope.mydata, function(item){
-//                   // alert(item.email);  
-//                   if((item.email==$scope.regVal.usernameInput)&&(item.Password==$scope.regVal.psw))
-//                   {
-//                     stat="true";
-//                   }
-
-
-//                });
-// $scope.regVal.usernameInput="";
-// $scope.regVal.psw="";
-//   if(stat=="true")
-//     alert("Success");
-//   else
-//     alert("Failure");
-//   };
-  
-//  $scope.regVal = {
-// 			"username" : "",
-// 			"password" : ""
-			
-// 		};
-// $scope.mydata;
-//   $http.get("/users.json")
-//   .then(function(response) {
-//       $scope.mydata = response.data;
-//        angular.forEach($scope.mydata, function(item){
-//                   // alert(item.email);  
-//                })
-      
-//   });
-  
-  
+// --------------------------------------------Trying login verification with Json-------------------------//
+// regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
+//     $http.get("./users.json").then(
+//     (res)=>{
+//         $rootScope.textData = res.data;
+//         let emailInput = document.getElementsByTagName("input")[0];
+//         let passwordInput = document.getElementsByTagName("input")[1];
+//         $rootScope.emailCookieChecker();
+//         $rootScope.signInChecker = (data, account, password) => {
+//             for (let obj of data) {
+//                 if (obj.account == account && obj.password == password) {
+//                     console.log("Login success!");
+//                     return obj;
+//                     }
+//                     }
+//                     return false;
+//                     };
+//         $rootScope.emailCookieChecker = () => {
+//             let email = $rootScope.getCookie("email");
+//             if (email != "") {
+//                 $rootScope.email = email;
+//                 checkBox.checked = true;
+//             }
+//         };
+//     }
+//     )
 // });
-//---------------------------calling the json file----------------------------------//
-    //     $scope.populate = (data)=>{
-    //     $scope.tbody = document.getElementsByTagName("tbody")[0];
-    //     $scope.datas = JSON.parse(data)
-    //     for ($scope.obj of datas){
-    //         $scope.tr = document.createElement('tr');
-    //         for ($scope.prop in obj){
-    //             $scope.td = document.createElement("td");
-    //             td.innerText = obj[prop];
-    //             tr.appendChild(td);
-    //         }
-    //         tbody.appendChild(tr);
-    //     }
-    // }
-    // async function loadJson(){
-    // $scope.ajaxPromise = new Promise ((resolve,reject)=>{
-    //     $scope.req = new XMLHttpRequest();
-    //     req.open("GET","./data.json");
-    //     req.onload = () =>{
-    //         if(req.status==200){
-    //             resolve(req.responseText);
-    //         }else{
-    //             reject(req.statusText0);
-    //         }
-    //     };
-    //     req.send();
-    // })
-    // populate(await ajaxPromise);
-    // }
-    // loadJson().then(
-    //     ()=>{},
-    //     (reason)=>{alert(reason);}
-    // )
 
-//-----------------Game Gallery accordion logic-------------------------------------------//
-// $(document).ready(function(){
-//   $("#flip").click(function(){
-//     $("#panel").slideDown("slow");
-//   });
-//     $("#flip").blur(function(){
-//     $("#panel").slideUp("fast");
-//   });
-// });
+
 
     
 </script>

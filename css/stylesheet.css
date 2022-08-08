@@ -38,9 +38,10 @@ a{
 button {
   color: white;
   background-color:midnightblue;
-  padding: 2%;
-  border-radius: 10%;
   border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
 footer {
@@ -95,12 +96,18 @@ footer {
   color: white;
 }
 .bns{
-  width: 17%;
+  width: 25%;
   height: 100%;
   display: flex;
   justify-content: space-between;
   align-items: center;
   text-align: center;
+}
+.bns>#cartt{
+  background-color: none;
+}
+#cartt:hover{
+  background-color:#a859c1;
 }
 .ckout{
   width: 10vh;
@@ -151,7 +158,9 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
 
 .carousel-item {
   width: 100%;
-  height: 90vh;
+  height: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .carousel-caption {
@@ -162,40 +171,7 @@ $defaultBackgroundColor: rgb(17, 34, 64); */
   z-index: 100;
   background: rgba(0,0,0,0.4);
 }
-.cookiepolicy{
-  width: 100%;
-  /* padding: 1%; */
-  /* background-color: black; */
-  color: white;
-  font-size: medium;
-  display: flex;
-  justify-content: end;
-  align-items: end;
-  position:fixed;
-  z-index: 20000;
-  left: 0;
-  top: 75%;
-  overflow: auto; /* Enable scroll if needed */
-}
-#cookieNotice{
-  display: flex;
-  width: 100%;
-  height: 100%;
-  padding: 1%;
-  background-color: black;
-  opacity: 80%;
-}
 
-.cookiepolicy button{
-  background-color: blanchedalmond;
-  width: auto;
-  height: auto;
-  border-color: #64ffda;
-}
-.cookiepolicy button:hover{
-  background-color: black;
-  color: white;
-}
 /* The dots/bullets/indicators */
 .dot {
   cursor: pointer;
@@ -326,6 +302,12 @@ button:hover {
   padding: 10px 18px;
   background-color: #f44336;
 }
+.container{
+  display: flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+}
 
 .container1 {
   display: flex;
@@ -361,7 +343,7 @@ span.psw {
   width: 100%; /* Full width */
   height: 100%; /* Full height */
   overflow: auto; /* Enable scroll if needed */
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 /* Modal Content/Box */
@@ -388,11 +370,46 @@ span.psw {
   color: red;
   cursor: pointer;
 }
-
+.closeBtn{
+  display: flex;
+  width: 100%;
+  top: 0;
+  padding-left: 98%;
+  color: white;
+  font-size: larger;
+}
+.closeBtn:hover{
+  color: #64ffda;
+}
+.ad2{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  align-items:stretch;
+  width: 10%;
+  height: 100%;
+  margin-right: 10px;
+}
+.ad2 button{
+  background-color:goldenrod;
+  border: 1px solid ;
+}
+.ad2 button:hover{
+  background-color:slateblue;
+}
 /* Add Zoom Animation */
 .animate {
   -webkit-animation: animatezoom 0.6s;
   animation: animatezoom 0.6s
+}
+.empty{
+  width: 100%;
+  background-color: #1aa786;
+  justify-content: center;
+  align-items: center;
+  display: flex;
+  text-align: center;
+  height: 10vh;
 }
 
 @-webkit-keyframes animatezoom {
@@ -476,7 +493,8 @@ input:checked + .slider:before {
   border-radius: 50%;
 }
 .gameTable{
-  width: 100%;
+  margin-left: 10%;
+  width: 80%;
   height: 100%;
   display: flex; 
   justify-content: space-between;
@@ -485,7 +503,23 @@ input:checked + .slider:before {
   flex-wrap: wrap;
   color: white;
 }
-
+.gms{
+  padding-bottom: 5%;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+}
+.btn-wrap{
+  padding-left: 30%;
+  padding-right: 30%;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 .games{
   width: 50%;
   height: 100%;
@@ -500,20 +534,65 @@ input:checked + .slider:before {
 .gm{
   width: 100%;
   height: 100%;
+  text-align:justify;
 }
+
 .buybut{
   display: flex;
   justify-content: center;
-  width: 50%;
+  width: 100%;
   height: 100%;
   align-items: center;
+  padding-left: 20%;
 }
 .buybut > button{
-  width: 120px;
-  height: 50px;
+  width: 70%;
+  height: 100%;
   display: flex;
-  text-align: center;
+  text-align: end;
   justify-content: center;
+}
+#buyModal{
+  /* display: flex; */
+  width: 80%;
+  height: min-content;
+  margin-left: 10%;
+  margin-top: 10%;
+}
+#cartModal{
+  width: 100%;
+  padding: 10%;
+}
+#cartModal .ad2{
+  width: 20%;
+}
+#cartModal img{
+  width: 40%;
+
+}
+.cartModal{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  height: 40%;
+  background-color: #1aa786;
+  left: 0;
+  border: 2px solid #64ffda;
+}
+
+.buyModal {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: center;
+  width:100%;
+  height: auto;
+  background-color: #1aa786;
+  left: 0;
+  border: 2px solid #64ffda;
+
 }
 
 .about-title {

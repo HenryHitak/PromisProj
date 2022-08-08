@@ -57,81 +57,85 @@
         </button>
     </div>
 </section>
-
+<!-- Game Table -->
     <input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
     <section class="gameTable">
         <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
             <div class="gm">
-                <img src="{{data.img}}" style="width:500px"></img>
-                <br><span>Game: {{data.game_name}}</span>
-                <br><span>Company: {{data.game_company}}</span>
-                <br><span>Price: {{data.currency_dollar}}</span>
-            </div>
-            <div class="buybut">
-                <button type="button" onclick="document.getElementById('buyModal').style.display='block'"
-                    ng-click="showItem()" value="{{data.game_name}}">Add to Cart</button>
+                <img ng-src="{{data.img}}" style="width:700px">
+                </div>
+            <div class="gms">
+                <div class="gm">
+                    <br><span>Game: {{data.game_name}}</span>
+                    <br><span>Company: {{data.game_company}}</span>
+                    <br><span>Price: {{data.cur}}{{data.currency_dollar}}</span>
+                </div>
+                <div class="buybut">
+                    <button type="button" onclick="document.getElementById('buyModal').style.display='block'"
+                        ng-click="showItem()" value="{{data.game_name}}">Add to Cart</button>
+                </div>
             </div>
         </div>
+<!-- add to cart -->
         <div class="modal" id="buyModal">
-        <span class="closeBtn" type="button"
-            onclick="document.getElementById('buyModal').style.display='none'">&#x2715</span>
-        <div class="buyModal" ng-repeat="buy in itemList">
+        <!-- <span class="closeBtn" type="button" onclick="document.getElementById('buyModal').style.display='none'" >&#x2715</span> -->
+        <div class="buyModal" ng-repeat="buy in itemList" >
             <img ng-src="{{buy.img}}">
-            <p>Game Name: {{buy.game_name}}</p>
-            <p>App Language: {{buy.app_language}}</p>
-            <p>App Version: {{buy.app_ver}}</p>
-            <p>App Year: {{buy.app_year}}</p>
-            <p>Game Company: {{buy.game_company}}</p>
-            <p>Price: {{buy.currency_dollar}}</p>
-            <button type="button" ng-click="addCart()" value="{{buy.game_name}}" onclick="document.getElementById('buyModal').style.display='none'">Buy</button>
+            <div>
+                <p>Game Name: {{buy.game_name}}</p>
+                <p>App Language: {{buy.app_language}}</p>
+                <p>App Version: {{buy.app_ver}}</p>
+                <p>App Year: {{buy.app_year}}</p>
+                <p>Game Company: {{buy.game_company}}</p>
+                <p>Price: {{buy.cur}}{{buy.currency_dollar}}</p>
+            </div>
+            <div class="ad2">
+                <button type="button" id="conbtn" onclick="document.getElementById('buyModal').style.display='none'">CONTINUE</button>
+                <button type="button" ng-click="addCart()" value="{{buy.game_name}}" onclick="document.getElementById('buyModal').style.display='none'" >Add to Cart!</button>
+            </div>
         </div>
-    </div>
-    <div class="modal" id="buyModal">
-        <span class="closeBtn" type="button"
-            onclick="document.getElementById('buyModal').style.display='none'">&#x2715</span>
-        <div class="buyModal" ng-repeat="buy in itemList">
-            <img ng-src="{{buy.img}}">
-            <p>Game Name: {{buy.game_name}}</p>
-            <p>App Language: {{buy.app_language}}</p>
-            <p>App Version: {{buy.app_ver}}</p>
-            <p>App Year: {{buy.app_year}}</p>
-            <p>Game Company: {{buy.game_company}}</p>
-            <p>Price: {{buy.currency_dollar}}</p>
-            <!-- add value -->
-            <button type="button" ng-click="addCart()"
-                onclick="document.getElementById('buyModal').style.display='none'"
-                value="{{buy.game_name}}">Buy</button>
         </div>
-    </div>
-    <div class="modal" id="cartModal">
-        <span class="closeBtn" type="button"
-            onclick="document.getElementById('cartModal').style.display='none'">&#x2715</span>
-        <div ng-show="showWarn"> Your Cart is Empty</div>
-        <div class="cartModal" ng-show="showCart">
+<!-- Cart checkout -->
+        <div class="modal" id="cartModal">
+        <span class="closeBtn" type="button" onclick="document.getElementById('cartModal').style.display='none'" >&#x2715</span>
+        <div ng-show="showWarn" class="empty"> Your Cart is Empty</div>
+        <div class="buyModal" ng-repeat="buy in itemList" ng-show="showCart">
             <table>
-                <tr>
-                    <th>Product</th>
-                    <th>Language</th>
-                    <th>Version</th>
-                    <th>Total</th>
-                </tr>
-                <tr ng-repeat = "buy in cartList">
-                    <td>{{buy.game_name}}</td>
-                    <td>{{buy.app_language}}</td>
-                    <td>{{buy.app_ver}}</td>
-                    <td>{{buy.currency_dollar}}</td>
-                </tr>
-                <tr>
-                    <td>Total:</td>
-                    <td></td>
-                    <td></td>
-                    <td>XXXX</td>
-                </tr>
+                <thead>
+                    <tr>
+                        <th>Product</th>
+                        <th>Language</th>
+                        <th>Version</th>
+                        <th>Total</th>
+                    </tr>
+                </thead>
+                <tbody ng-repeat = "buy in cartList" ng-init="$parent.total=total+buy.currency_dollar">
+                    <img ng-src="{{buy.img}}"/>
+                    <tr>
+                        <td>{{buy.game_name}}</td>
+                        <td>{{buy.app_language}}</td>
+                        <td>{{buy.app_ver}}</td>
+                        <td>{{buy.cur}}{{buy.currency_dollar}}</td>
+                        <td><span class="closeBtn" type="button" ng-click="deleteRow($index)">&#x2715</span></td>
+                    </tr>
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <td>Total:</td>
+                        <td></td>
+                        <td></td>
+                        <td id="total">{{buy.cur}}{{calTotal()}}</td>
+                        <!-- <td id="total">{{buy.cur}}{{total | number: 2}}</td> -->
+                    </tr>
+                </tfoot>
             </table>
-            <button type="button">Pay</button>
+            <div class="ad2">
+                <button type="button" id="conbtn" onclick="document.getElementById('cartModal').style.display='none'">CONTINUE</button>
+                <button type="button" id="finbtn" onclick="document.getElementById('cartModal').style.display='none'">FINISH SHOPPING</button>
+            </div>
+        </div>
         </div>
     </div>
-    </section>
 </section>
 <style>
     /* Slideshow container */
@@ -219,5 +223,20 @@
         from {opacity: .4}
         to {opacity: 1}
     }
+
+    .carousel-item img{
+        width: 100vh;
+        height: 60vh;
+    }
+    .carousel-item{
+        border: 4px solid #64ffda;
+    }
+#buymodal{
+    display: flex;
+    width: 100%;
+}
+#buyModal img{
+    width: 50%;
+}
 </style>
 

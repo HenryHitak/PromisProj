@@ -240,6 +240,13 @@ regApp.controller('regCtrl',($scope,$http,$rootScope)=>{
             }
         }
     }
+    $scope.calTotal = ()=>{
+        let total = 0;
+        for(let data of $rootScope.cartList){
+            total += data.currency_dollar
+        }
+        return parseFloat(total);
+    }
     // ----------------------------------------------------delete button------------------------//
     $scope.deleteRow= function (i) {
         $scope.total = document.getElementById(total);

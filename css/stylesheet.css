@@ -503,6 +503,9 @@ input:checked + .slider:before {
   flex-wrap: wrap;
   color: white;
 }
+.gmgm{
+  justify-content: center;
+}
 .gms{
   padding-bottom: 5%;
   width: 100%;

@@ -1,8 +1,8 @@
 <input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
 <section class="gameTable">
-    <div class="games" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
-        <div class="gm">
-            <img src="{{data.img}}" style="width:500px">
+    <div class="games gmgm" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
+        <div class="gm gmgm">
+            <img src="{{data.img}}" style="width:700px">
             <br><span>Game: {{data.game_name}}</span>
             <br><span>Company: {{data.game_company}}</span>
             <br><span>Price: {{data.currency_dollar}}</span>
@@ -20,6 +20,10 @@
     }
     .gm{
         border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
     }
     .games{
         border: none;

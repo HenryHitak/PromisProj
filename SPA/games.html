@@ -1,0 +1,54 @@
+<input type="text" ng-model="game_nameSearch" placeholder="Search by game name!" style="width: 60%;">
+<section class="gameTable">
+    <div class="games gmgm" ng-repeat="data in textData | orderBy:'game_name' | filter:game_nameSearch">
+        <div class="gm gmgm">
+            <img src="{{data.img}}" style="width:100%;">
+            <br><span>Game: {{data.game_name}}</span>
+            <br><span>Company: {{data.game_company}}</span>
+            <br><span>Price: {{data.currency_dollar}}</span>
+            <br><h8 class="checkmark"> Details<input type="checkbox" ng-model="myCheck" class="ch"></h8>
+            <div ng-show="myCheck" class="detailshow">
+               <p>{{data.desc}}</p> 
+            </div>
+            <div ng-hide="!myCheck" class="detailshow"></div>  
+        </div>
+    </div>
+</section>
+<style>
+    .gm:hover{
+        border: 1px solid #64ffda;
+    }
+    .gm{
+        border: none;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+    .games{
+        border: none;
+    }
+    .gm details:hover{
+        color: #3fb196;
+    }
+    .gm:hover{
+    background-color: rgb(124, 110, 210);
+    }
+    .detailshow p{
+       background-color: rgb(124, 110, 210); 
+    }
+    @keyframes myChange {
+    from {
+        height: 100%;
+    } to {
+        height: 0;
+    }
+    }
+
+    .detailshow.ng-hide {
+    animation: 0.3s myChange;
+    }
+    .ch:hover input ~ .checkmark {
+    background-color: #ccc;
+    }
+</style>
